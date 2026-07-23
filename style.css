@@ -856,3 +856,390 @@ img {
 .work-card:hover::after {
   opacity: 1;
 }
+
+/* ============================================
+   HERO BADGE
+   ============================================ */
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 50px;
+  padding: 6px 14px;
+  font-size: 12px;
+  color: var(--text-secondary);
+  letter-spacing: 0.01em;
+  margin-bottom: 28px;
+  opacity: 0;
+  animation: fadeUp 0.8s var(--transition) 0s forwards;
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #22c55e;
+  box-shadow: 0 0 6px #22c55e;
+  flex-shrink: 0;
+}
+
+.hero-highlight {
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+/* ============================================
+   FEATURED CARD
+   ============================================ */
+.work-card--featured {
+  grid-column: 1 / -1;
+}
+
+.work-card--featured .work-card-image {
+  aspect-ratio: 21 / 8;
+}
+
+.work-card--featured .work-card-mockup {
+  width: 50%;
+  max-width: 480px;
+}
+
+.featured-badge {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  z-index: 2;
+  background: rgba(34,197,94,0.15);
+  border: 1px solid rgba(34,197,94,0.3);
+  color: rgba(134,239,172,0.95);
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 50px;
+  letter-spacing: 0.02em;
+}
+
+/* ============================================
+   TAGS
+   ============================================ */
+.work-card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+}
+
+.tag {
+  font-size: 11px;
+  padding: 3px 10px;
+  border-radius: 4px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+}
+
+.tag--sm {
+  font-size: 10px;
+  padding: 2px 8px;
+}
+
+/* ============================================
+   MOCKUP ELEMENTS (extended)
+   ============================================ */
+.mockup-header-row {
+  display: flex;
+  gap: 6px;
+  margin-bottom: 6px;
+}
+
+.mockup-chip {
+  border: 1px solid rgba(255,255,255,0.08);
+  color: var(--text-muted);
+}
+
+.mockup-stats-row {
+  display: flex;
+  gap: 16px;
+  padding-top: 10px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+}
+
+.mstat {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.mstat-val {
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.mstat-lbl {
+  font-size: 9px;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.qr-mockup {
+  width: 40px;
+  height: 40px;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.qr-inner {
+  width: 22px;
+  height: 22px;
+  background:
+    repeating-linear-gradient(0deg, rgba(255,255,255,0.15) 0px, rgba(255,255,255,0.15) 2px, transparent 2px, transparent 4px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,0.15) 0px, rgba(255,255,255,0.15) 2px, transparent 2px, transparent 4px);
+}
+
+.mockup-map-placeholder {
+  height: 52px;
+  background: rgba(255,255,255,0.04);
+  border-radius: 6px;
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+  overflow: hidden;
+}
+
+.map-route-line {
+  position: absolute;
+  top: 50%;
+  left: 15%;
+  right: 15%;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(99,102,241,0.6), rgba(165,180,252,0.3));
+  transform: translateY(-50%);
+  border-radius: 1px;
+}
+
+.map-dot {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.map-dot--start {
+  left: 15%;
+  background: rgba(99,102,241,0.9);
+  box-shadow: 0 0 6px rgba(99,102,241,0.6);
+}
+
+.map-dot--end {
+  right: 15%;
+  background: rgba(165,180,252,0.9);
+  box-shadow: 0 0 6px rgba(165,180,252,0.6);
+}
+
+/* ============================================
+   MORE PROJECTS SECTION
+   ============================================ */
+.more-projects-section {
+  padding: 40px 40px 80px;
+  border-top: 1px solid var(--border);
+}
+
+.more-projects-header {
+  margin-bottom: 40px;
+}
+
+.more-projects-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--border);
+}
+
+.mini-project {
+  background: var(--bg);
+  padding: 28px 28px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  transition: background var(--transition);
+}
+
+.mini-project:hover {
+  background: var(--card-hover);
+}
+
+.mini-project-title {
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--text-primary);
+  letter-spacing: -0.01em;
+}
+
+.mini-project-desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  flex: 1;
+}
+
+.mini-project-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+/* ============================================
+   CONTACT CHIPS
+   ============================================ */
+.contact-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.contact-chip {
+  font-size: 13px;
+  padding: 7px 14px;
+  border-radius: 50px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--text-secondary);
+  transition: color var(--transition), border-color var(--transition);
+  cursor: pointer;
+}
+
+.contact-chip:hover {
+  color: var(--text-primary);
+  border-color: rgba(255,255,255,0.25);
+}
+
+/* ============================================
+   AWARD BADGES
+   ============================================ */
+.experience-awards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.award-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 6px 14px;
+  border-radius: 6px;
+  letter-spacing: 0.01em;
+}
+
+.award-badge--gold {
+  background: rgba(234,179,8,0.12);
+  border: 1px solid rgba(234,179,8,0.25);
+  color: rgba(253,224,71,0.9);
+}
+
+.award-badge--blue {
+  background: rgba(99,102,241,0.12);
+  border: 1px solid rgba(99,102,241,0.25);
+  color: rgba(165,180,252,0.9);
+}
+
+/* ============================================
+   EXPERIENCE STACK TAGS
+   ============================================ */
+.experience-stack {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 14px;
+}
+
+/* ============================================
+   SKILLS GRID
+   ============================================ */
+.skills-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 40px;
+}
+
+.skill-group-title {
+  font-size: 11px;
+  letter-spacing: 0.08em;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 500;
+  margin-bottom: 14px;
+}
+
+.skill-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+/* ============================================
+   RESPONSIVE ADDITIONS
+   ============================================ */
+@media (max-width: 1024px) {
+  .work-card--featured .work-card-image {
+    aspect-ratio: 16 / 8;
+  }
+  .work-card--featured .work-card-mockup {
+    width: 65%;
+  }
+  .more-projects-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .skills-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .hero-badge {
+    font-size: 11px;
+    padding: 5px 12px;
+  }
+  .work-card--featured {
+    grid-column: 1;
+  }
+  .work-card--featured .work-card-image {
+    aspect-ratio: 16 / 10;
+  }
+  .work-card--featured .work-card-mockup {
+    width: 75%;
+  }
+  .featured-badge {
+    top: 12px;
+    right: 12px;
+    font-size: 11px;
+  }
+  .more-projects-section {
+    padding: 40px 20px 60px;
+  }
+  .more-projects-grid {
+    grid-template-columns: 1fr;
+  }
+  .skills-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .contact-chips {
+    flex-direction: column;
+  }
+}
+
