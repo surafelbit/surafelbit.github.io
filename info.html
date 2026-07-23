@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Info &mdash; Product Designer</title>
+  <meta name="description" content="About me - background in architecture, UX design, and product design." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav class="navbar" id="navbar">
+    <div class="nav-left">
+      <a href="index.html" class="nav-name">Your Name</a>
+      <span class="nav-title">Product Designer</span>
+    </div>
+    <div class="nav-center">
+      <div class="nav-toggle">
+        <div class="nav-toggle-indicator" id="nav-indicator" style="left: calc(50% + 2px);"></div>
+        <a href="index.html" class="nav-toggle-btn" id="work-btn">Work</a>
+        <a href="info.html" class="nav-toggle-btn active" id="info-btn">Info</a>
+      </div>
+    </div>
+    <div class="nav-right">
+      <a href="#" class="nav-link" target="_blank">LinkedIn <span class="arrow">&#8599;</span></a>
+      <a href="#" class="nav-link" target="_blank">Resume <span class="arrow">&#8599;</span></a>
+    </div>
+  </nav>
+
+  <!-- INFO PAGE CONTENT -->
+  <main class="info-main">
+
+    <!-- INTRO SECTION -->
+    <section class="info-intro">
+      <div class="info-intro-left">
+        <div class="info-photo-wrap">
+          <img src="images/portrait.png" alt="Portrait photo" class="info-photo" />
+        </div>
+      </div>
+      <div class="info-intro-right">
+        <div class="info-photo-wrap info-photo-wrap--right">
+          <img src="images/japan_torii.png" alt="Japan travel photo" class="info-photo" />
+        </div>
+      </div>
+    </section>
+
+    <!-- HELLO SECTION -->
+    <section class="info-hello">
+      <div class="info-text-col">
+        <h2 class="info-section-title">Thanks for stopping by!</h2>
+        <div class="info-signature">
+          <!-- Stylized signature SVG -->
+          <svg width="120" height="60" viewBox="0 0 120 60" fill="none" xmlns="http://www.w3.org/2000/svg" class="signature-svg">
+            <path d="M10 45 C20 15, 35 10, 45 30 C50 38, 55 20, 65 25 C75 30, 70 45, 80 40 C90 35, 95 20, 110 18" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+            <path d="M15 50 C30 48, 50 52, 70 48 C85 45, 95 50, 110 45" stroke="white" stroke-width="1" fill="none" stroke-linecap="round" opacity="0.5"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <hr class="info-divider" />
+
+    <!-- ARCHITECTURE SECTION -->
+    <section class="info-story-section">
+      <div class="info-story-left">
+        <div class="info-photo-wrap info-photo-wrap--portrait">
+          <img src="images/portrait.png" alt="Architecture background" class="info-photo" />
+        </div>
+      </div>
+      <div class="info-story-right">
+        <div class="info-story-text">
+          <h2 class="info-story-heading">My background in Architecture.</h2>
+          <p class="info-story-body">In June of 2022, I graduated from architecture school at the University of Toronto. There, I became obsessed with architectural visualization.</p>
+          <p class="info-story-body">I was deeply fascinated in the concepts of modularity and adaptability &mdash; how our built environment could organically evolve in conjuction with humanity.</p>
+        </div>
+        <div class="info-photo-wrap info-photo-wrap--landscape">
+          <img src="images/japan_torii.png" alt="Travel photography Japan" class="info-photo" />
+        </div>
+      </div>
+    </section>
+
+    <!-- MORE TEXT + IMAGES -->
+    <section class="info-story-section info-story-section--alt">
+      <div class="info-story-left">
+        <div class="info-photo-wrap info-photo-wrap--portrait">
+          <img src="images/playground.png" alt="Playground photo" class="info-photo" />
+        </div>
+        <div class="info-story-text" style="margin-top: 60px;">
+          <h2 class="info-story-heading">This thing called UX?</h2>
+          <p class="info-story-body">When the pandemic struck, I took it as an opportunity to explore new things. I came across UX design competitions, and thought it might be fun to just give it a go (several times).</p>
+          <p class="info-story-body">Long story short, my failures eventually turned into successes, and the rest was history.</p>
+        </div>
+      </div>
+      <div class="info-story-right">
+        <div class="info-story-text" style="padding-top: 0;">
+          <h2 class="info-story-heading">But, I wanted more.</h2>
+          <p class="info-story-body">After spending time in architectural design, I realized I wanted to design systems that scaled to millions of users &mdash; not just physical buildings.</p>
+          <p class="info-story-body">I pursued UX, then product design, and found my true calling in crafting thoughtful digital experiences.</p>
+        </div>
+        <div class="info-photo-wrap info-photo-wrap--landscape" style="margin-top: 40px;">
+          <img src="images/fishing.png" alt="Fishing photo" class="info-photo" />
+        </div>
+      </div>
+    </section>
+
+    <hr class="info-divider" />
+
+    <!-- EXPERIENCE SECTION -->
+    <section class="info-experience">
+      <div class="info-section-label">
+        <div class="label-dot"></div>
+        <span class="label-text">EXPERIENCE</span>
+      </div>
+
+      <div class="experience-entry">
+        <div class="experience-company">Discord</div>
+        <div class="experience-detail">
+          <h3 class="experience-role">Sr. Product Designer, Core Product</h3>
+          <p class="experience-period">07/'23 &ndash; Present</p>
+          <p class="experience-desc">I'm designing the future of Discord's messaging &amp; core product experiences, amongst other top secret projects.</p>
+        </div>
+      </div>
+
+      <hr class="info-divider" />
+
+      <div class="experience-entry">
+        <div class="experience-company">RBC</div>
+        <div class="experience-detail">
+          <h3 class="experience-role">UX Design Intern, Innovation</h3>
+          <p class="experience-period">Summer '21</p>
+          <p class="experience-desc">I championed the redesign of the bank's internal corporate cards portal, and designed a patented wealth management network visualizer.</p>
+        </div>
+      </div>
+
+      <hr class="info-divider" />
+    </section>
+
+    <!-- FRIENDS SECTION -->
+    <section class="info-friends">
+      <div class="info-section-label">
+        <div class="label-dot"></div>
+        <span class="label-text">FRIENDS</span>
+      </div>
+
+      <div class="friends-grid">
+        <div class="friend-entry">
+          <h3 class="friend-name">Friend One</h3>
+          <p class="friend-role">Founding Designer &mdash; Blockus</p>
+          <a href="#" class="friend-link" target="_blank">website.com <span class="arrow">&#8599;</span></a>
+        </div>
+        <div class="friend-entry">
+          <h3 class="friend-name">Friend Two</h3>
+          <p class="friend-role">Designer &mdash; Disney</p>
+          <a href="#" class="friend-link" target="_blank">portfolio.com <span class="arrow">&#8599;</span></a>
+        </div>
+        <div class="friend-entry">
+          <h3 class="friend-name">Friend Three</h3>
+          <p class="friend-role">Designer &mdash; Apple</p>
+          <a href="#" class="friend-link" target="_blank">jc.works <span class="arrow">&#8599;</span></a>
+        </div>
+        <div class="friend-entry">
+          <h3 class="friend-name">Friend Four</h3>
+          <p class="friend-role">Designer &mdash; Horrible Design Co.</p>
+          <a href="#" class="friend-link" target="_blank">read.cv/friend <span class="arrow">&#8599;</span></a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="footer-inner">
+      <div class="footer-col">
+        <p class="footer-label">MAIN</p>
+        <a href="index.html" class="footer-link">Work</a>
+        <a href="info.html" class="footer-link">Info</a>
+      </div>
+      <div class="footer-col">
+        <p class="footer-label">CONTACT</p>
+        <a href="#" class="footer-link" target="_blank">LinkedIn <span class="arrow">&#8599;</span></a>
+        <a href="#" class="footer-link" target="_blank">Resume <span class="arrow">&#8599;</span></a>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-bottom-left">
+        <p class="footer-copy">&copy; 2025 Your Name. All Rights Reserved.</p>
+        <p class="footer-copy footer-muted">Made with love and Mango Green Teas (50% sugar, less ice).</p>
+      </div>
+      <p class="footer-copy footer-muted">2025 Portfolio Coming Soon &#x1F642;</p>
+    </div>
+  </footer>
+
+  <script src="main.js"></script>
+</body>
+</html>
