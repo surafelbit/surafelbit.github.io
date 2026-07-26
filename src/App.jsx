@@ -1,122 +1,119 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import React, { useRef, useMemo } from 'react'
+import { Canvas, useFrame } from '@react-three/fiber'
+import { Points, PointMaterial } from '@react-three/drei'
 
-function App() {
-  const [count, setCount] = useState(0)
+// 3D Particle Field inspired by image #2 & #3
+function ParticleField() {
+  const ref = useRef()
+
+  // Generate 2,000 random 3D particle positions
+  const sphereParticles = useMemo(() => {
+    const positions = new Float32Array(2000 * 3)
+    for (let i = 0; i < 2000; i++) {
+      const u = Math.random()
+      const v = Math.random()
+      const theta = u * 2.0 * Math.PI
+      const phi = Math.acos(2.0 * v - 1.0)
+      const r = 2.5 + Math.random() * 1.5 // Radius range
+
+      positions[i * 3] = r * Math.sin(phi) * Math.cos(theta)
+      positions[i * 3 + 1] = r * Math.sin(phi) * Math.sin(theta)
+      positions[i * 3 + 2] = r * Math.cos(phi)
+    }
+    return positions
+  }, [])
+
+  // Slowly rotate the particle cloud
+  useFrame((state, delta) => {
+    ref.current.rotation.x -= delta * 0.05
+    ref.current.rotation.y -= delta * 0.08
+  })
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    <group rotation={[0, 0, Math.PI / 4]}>
+      <Points ref={ref} positions={sphereParticles} stride={3} frustumCulled={false}>
+        <PointMaterial
+          transparent
+          color="#00ff66"
+          size={0.03}
+          sizeAttenuation={true}
+          depthWrite={false}
+          opacity={0.6}
+        />
+      </Points>
+    </group>
   )
 }
 
-export default App
+export default function App() {
+  return (
+    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+
+      {/* --- 3D CANVAS BACKGROUND --- */}
+      <Canvas
+        camera={{ position: [0, 0, 5], fov: 60 }}
+        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}
+      >
+        <ambientLight intensity={0.5} />
+        <ParticleField />
+      </Canvas>
+
+      {/* --- NAVIGATION HEADER --- */}
+      <nav className="nav-header">
+        <div className="brand-badge">
+          <div className="brand-name">Surafel Muhabaw</div>
+          <div className="brand-role">Full Stack & Mobile Developer</div>
+        </div>
+        <a href="#contact" className="btn btn-outline" style={{ padding: '0.6rem 1.4rem' }}>
+          Let's Talk
+        </a>
+      </nav>
+
+      {/* --- HERO SECTION --- */}
+      <main className="hero-container">
+
+        {/* Left Column: Headlines & CTA */}
+        <div className="hero-left">
+          <h1 className="hero-title">
+            FULLSTACK <br />
+            <span className="accent-text">DEVELOPER</span>
+          </h1>
+
+          <p className="hero-bio">
+            Passionate about architecting high-performance web systems and seamless mobile applications.
+            Focused on clean backend logic and intuitive visual experiences.
+          </p>
+
+          <div className="cta-group">
+            <a href="#contact" className="btn btn-primary">
+              Hire Me
+            </a>
+            <a href="#resume" className="btn btn-outline">
+              Resume
+            </a>
+          </div>
+        </div>
+
+        {/* Right Column: Key Stats */}
+        <div className="stats-column">
+          <div className="stat-item">
+            <div className="stat-number">2+</div>
+            <div className="stat-label">Years Experience</div>
+          </div>
+
+          <div className="stat-item">
+            <div className="stat-number">10+</div>
+            <div className="stat-label">Completed Projects</div>
+          </div>
+
+          <div className="stat-item">
+            <div className="stat-number">2x</div>
+            <div className="stat-label">Hackathon Winner</div>
+          </div>
+        </div>
+
+      </main>
+
+    </div>
+  )
+}
