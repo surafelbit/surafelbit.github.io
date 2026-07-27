@@ -64,18 +64,21 @@ export default function App() {
           <div className="brand-name">Surafel Muhabaw</div>
           <div className="brand-role">Full Stack & Mobile Developer</div>
         </div>
-        <a href="#contact" className="btn btn-outline" style={{ padding: '0.6rem 1.4rem' }}>
-          Let's Talk
-        </a>
+        <div className="nav-actions">
+          <a href="#resume" className="btn btn-outline" style={{ padding: '0.6rem 1.4rem' }}>Resume</a>
+          <a href="#contact" className="btn btn-primary" style={{ padding: '0.6rem 1.4rem' }}>Let's Talk</a>
+        </div>
       </nav>
 
       {/* --- HERO SECTION --- */}
       <main className="hero-container">
 
-        {/* Left Column: Headlines & CTA */}
+        {/* LEFT: Text Content */}
         <div className="hero-left">
+
           <h1 className="hero-title">
-            FULLSTACK <br />
+            FULLSTACK &amp; <br />
+            MOBILE APP <br />
             <span className="accent-text">DEVELOPER</span>
           </h1>
 
@@ -84,32 +87,37 @@ export default function App() {
             Focused on clean backend logic and intuitive visual experiences.
           </p>
 
-          <div className="cta-group">
-            <a href="#contact" className="btn btn-primary">
-              Hire Me
-            </a>
-            <a href="#resume" className="btn btn-outline">
-              Resume
-            </a>
+
+
+          {/* Stats Row */}
+          <div className="stats-row">
+            <div className="stat-item">
+              <div className="stat-number">2+</div>
+              <div className="stat-label">Years Experience</div>
+            </div>
+            <div className="stat-divider"></div>
+            <div className="stat-item">
+              <div className="stat-number">10+</div>
+              <div className="stat-label">Completed Projects</div>
+            </div>
+            <div className="stat-divider"></div>
+            <div className="stat-item">
+              <div className="stat-number">2x</div>
+              <div className="stat-label">Hackathon Winner</div>
+            </div>
           </div>
+
         </div>
 
-        {/* Right Column: Key Stats */}
-        <div className="stats-column">
-          <div className="stat-item">
-            <div className="stat-number">2+</div>
-            <div className="stat-label">Years Experience</div>
-          </div>
-
-          <div className="stat-item">
-            <div className="stat-number">10+</div>
-            <div className="stat-label">Completed Projects</div>
-          </div>
-
-          <div className="stat-item">
-            <div className="stat-number">2x</div>
-            <div className="stat-label">Hackathon Winner</div>
-          </div>
+        {/* RIGHT: Portrait Photo */}
+        <div className="hero-photo-wrap">
+          <img
+            src="/png.png"
+            alt="Surafel Muhabaw"
+            className="hero-photo"
+          />
+          {/* Bottom fade into dark background */}
+          <div className="photo-fade"></div>
         </div>
 
       </main>
