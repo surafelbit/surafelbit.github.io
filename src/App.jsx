@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
+import { motion } from 'motion/react'
 import VariableProximity from './VariableProximity'
 
 // 3D Particle Field inspired by image #2 & #3
@@ -46,10 +47,11 @@ function ParticleField() {
   )
 }
 
+
 export default function App() {
   const bioContainerRef = useRef(null)
   return (
-    <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
+    <div style={{ width: '100vw', minHeight: '100vh', position: 'relative' }}>
 
       {/* --- 3D CANVAS BACKGROUND --- */}
       <Canvas
@@ -79,9 +81,30 @@ export default function App() {
         <div className="hero-left">
 
           <h1 className="hero-title">
-            FULLSTACK &amp; <br />
-            MOBILE APP <br />
-            <span className="accent-text">DEVELOPER</span>
+            <motion.span
+              className="title-line-1"
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.1 }}
+            >
+              FULLSTACK &amp;
+            </motion.span>
+            <motion.span
+              className="title-line-2"
+              initial={{ opacity: 0, y: 50 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.3 }}
+            >
+              MOBILE APP
+            </motion.span>
+            <motion.span
+              className="title-line-3"
+              initial={{ opacity: 0, y: 60 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.7, ease: 'easeOut', delay: 0.55 }}
+            >
+              DEVELOPER
+            </motion.span>
           </h1>
 
           <div
@@ -123,17 +146,96 @@ export default function App() {
         </div>
 
         {/* RIGHT: Portrait Photo */}
-        <div className="hero-photo-wrap">
-          <img
-            src="/png.png"
-            alt="Surafel Muhabaw"
-            className="hero-photo"
-          />
-          {/* Bottom fade into dark background */}
-          <div className="photo-fade"></div>
+        <div className="hero-photo-outer">
+          <div className="hero-photo-inner">
+            <img
+              src="/png.png"
+              alt="Surafel Muhabaw"
+              className="hero-photo"
+            />
+            <div className="photo-fade" />
+          </div>
         </div>
 
       </main>
+      {/* --- ABOUT SECTION --- */}
+      <section className="about-section" id="about">
+
+        {/* Top label */}
+        <motion.div
+          className="about-label"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="about-label-line" />
+          About Me
+          <span className="about-label-line" />
+        </motion.div>
+
+        {/* Big statement */}
+        <motion.h2
+          className="about-statement"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.8, delay: 0.1 }}
+        >
+          I'm a <span className="about-accent">Software Engineer</span> &amp;{' '}
+          <span className="about-accent">Full Stack Developer</span> passionate
+          about building products that are as functional as they are intuitive.
+        </motion.h2>
+
+        {/* Tags row */}
+        <motion.div
+          className="about-tags"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+        >
+          {['2× Hackathon Winner', 'Award-Winning Projects', 'Full Stack', 'Mobile Dev', 'Clean Code'].map(tag => (
+            <span key={tag} className="about-tag">{tag}</span>
+          ))}
+        </motion.div>
+
+        {/* Two-column detail */}
+        <div className="about-columns">
+          <motion.div
+            className="about-col"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.25 }}
+          >
+            <h3 className="about-col-title">What I Do</h3>
+            <p className="about-col-text">
+              I work across the full stack — designing backend systems,
+              crafting responsive frontends, and connecting everything in between.
+              My focus is on performance, scalability, and experiences that feel
+              effortless to use.
+            </p>
+          </motion.div>
+
+          <motion.div
+            className="about-col"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.7, delay: 0.4 }}
+          >
+            <h3 className="about-col-title">My Edge</h3>
+            <p className="about-col-text">
+              I've shipped award-winning products and competed — and won — at
+              multiple hackathons. I bring both technical depth and product
+              thinking to every project, making sure what ships is solid,
+              maintainable, and genuinely useful.
+            </p>
+          </motion.div>
+        </div>
+
+      </section>
 
     </div>
   )
