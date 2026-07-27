@@ -245,6 +245,131 @@ export default function App() {
 
       </section>
 
+      {/* --- SKILLS SECTION --- */}
+      <section className="skills-section" id="skills">
+
+        <motion.div
+          className="about-label"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="about-label-line" />
+          Technical Skills
+          <span className="about-label-line" />
+        </motion.div>
+
+        <motion.h2
+          className="skills-heading"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          My tech stack<span className="skills-dot">.</span>
+        </motion.h2>
+
+        {[
+          {
+            category: 'Languages',
+            skills: [
+              { name: 'Python',     icon: 'python/python-original' },
+              { name: 'JavaScript', icon: 'javascript/javascript-original' },
+              { name: 'TypeScript', icon: 'typescript/typescript-original' },
+              { name: 'PHP',        icon: 'php/php-original' },
+              { name: 'Go',         icon: 'go/go-original-wordmark' },
+              { name: 'Dart',       icon: 'dart/dart-original' },
+              { name: 'HTML5',      icon: 'html5/html5-original' },
+              { name: 'CSS3',       icon: 'css3/css3-original' },
+            ],
+          },
+          {
+            category: 'Frontend',
+            skills: [
+              { name: 'React.js',     icon: 'react/react-original' },
+              { name: 'Next.js',      icon: 'nextjs/nextjs-original', invert: true },
+              { name: 'Vue.js',       icon: 'vuejs/vuejs-original' },
+              { name: 'Tailwind CSS', icon: 'tailwindcss/tailwindcss-original' },
+            ],
+          },
+          {
+            category: 'Backend',
+            skills: [
+              { name: 'Node.js',    icon: 'nodejs/nodejs-original' },
+              { name: 'Express.js', icon: 'express/express-original', invert: true },
+              { name: 'Nest.js',    icon: 'nestjs/nestjs-original' },
+              { name: 'Laravel',    icon: 'laravel/laravel-original' },
+            ],
+          },
+          {
+            category: 'Database & ORM',
+            skills: [
+              { name: 'PostgreSQL', icon: 'postgresql/postgresql-original' },
+              { name: 'MongoDB',    icon: 'mongodb/mongodb-original' },
+              { name: 'Mongoose',   icon: 'mongodb/mongodb-original' },
+              { name: 'Prisma',     icon: 'prisma/prisma-original', invert: true },
+            ],
+          },
+          {
+            category: 'Tools',
+            skills: [
+              { name: 'Git',    icon: 'git/git-original' },
+              { name: 'Docker', icon: 'docker/docker-original' },
+              { name: 'GitHub', icon: 'github/github-original', invert: true },
+            ],
+          },
+        ].map((group, gi) => (
+          <div key={group.category} className="skill-group">
+            <motion.h3
+              className="skill-group-title"
+              initial={{ opacity: 0, x: -20 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.4 }}
+              transition={{ duration: 0.5, delay: 0.05 }}
+            >
+              {group.category}
+            </motion.h3>
+
+            <div className="skill-logo-grid">
+              {group.skills.map((skill, si) => (
+                <motion.div
+                  key={skill.name}
+                  className="skill-logo-card"
+                  initial={{ opacity: 0, y: 40, scale: 0.85 }}
+                  whileInView={{ opacity: 1, y: 0, scale: 1 }}
+                  viewport={{ once: true, amount: 0.1 }}
+                  transition={{ duration: 0.5, delay: gi * 0.05 + si * 0.065, ease: 'easeOut' }}
+                  whileHover={{
+                    y: -20,
+                    scale: 1.18,
+                    rotateX: -8,
+                    rotateY: 6,
+                    transition: { duration: 0.22, ease: 'easeOut' }
+                  }}
+                  style={{ transformPerspective: 800 }}
+                >
+                  <motion.div
+                    className="skill-logo-img-wrap"
+                    whileHover={{ scale: 1.12 }}
+                    transition={{ duration: 0.2 }}
+                  >
+                    <img
+                      src={`https://cdn.jsdelivr.net/gh/devicons/devicon@latest/icons/${skill.icon}.svg`}
+                      alt={skill.name}
+                      className={`skill-logo-img${skill.invert ? ' skill-logo-invert' : ''}`}
+                      loading="lazy"
+                    />
+                  </motion.div>
+                  <span className="skill-logo-name">{skill.name}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        ))}
+
+      </section>
+
     </div>
   )
 }

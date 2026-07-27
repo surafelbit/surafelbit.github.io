@@ -106,40 +106,39 @@ body {
   font-weight: 900;
   display: flex;
   flex-direction: column;
-  gap: 0.1em;
+  gap: 0.08em;
 }
 
-/* Line 1: FULLSTACK & — outlined ghost text */
+/* Line 1: FULLSTACK & — dominant, orange shimmer (PRIMARY emphasis) */
 .title-line-1 {
-  font-size: clamp(2rem, 4vw, 5rem);
-  font-weight: 700;
-  letter-spacing: 0.14em;
-  -webkit-text-stroke: 1.5px rgba(168, 216, 234, 0.7);
-  color: transparent;
-  opacity: 0.85;
-}
-
-/* Line 2: MOBILE APP — huge solid white */
-.title-line-2 {
-  font-size: clamp(3.5rem, 7vw, 8.5rem);
+  font-size: clamp(3.8rem, 7.5vw, 9rem);
   font-weight: 900;
-  letter-spacing: 0.01em;
-  color: #ffffff;
-  text-shadow: 0 2px 40px rgba(255, 255, 255, 0.12);
-}
-
-/* Line 3: DEVELOPER — vivid gradient + glow pulse */
-.title-line-3 {
-  font-size: clamp(2.8rem, 5.5vw, 7rem);
-  font-weight: 900;
-  letter-spacing: 0.08em;
-  background: linear-gradient(90deg, #ff6b2b 0%, #ff9f43 40%, #ffd32a 75%, #ff6b2b 100%);
+  letter-spacing: 0.04em;
+  background: linear-gradient(90deg, #ff6b2b 0%, #ff9f43 35%, #ffd32a 65%, #ff6b2b 100%);
   background-size: 200% auto;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
   animation: shimmer 3s linear infinite, glowPulse 2.5s ease-in-out infinite;
-  filter: drop-shadow(0 0 22px rgba(255, 107, 43, 0.55));
+}
+
+/* Line 2: MOBILE APP — smaller ghost/outline (supporting) */
+.title-line-2 {
+  font-size: clamp(1.8rem, 3.2vw, 4rem);
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  -webkit-text-stroke: 1px rgba(255, 255, 255, 0.45);
+  color: transparent;
+  opacity: 0.7;
+}
+
+/* Line 3: DEVELOPER — solid white, large anchor */
+.title-line-3 {
+  font-size: clamp(3rem, 5.8vw, 7rem);
+  font-weight: 900;
+  letter-spacing: 0.06em;
+  color: #ffffff;
+  text-shadow: 0 2px 40px rgba(255, 255, 255, 0.1);
 }
 
 @keyframes shimmer {
@@ -148,8 +147,8 @@ body {
 }
 
 @keyframes glowPulse {
-  0%, 100% { filter: drop-shadow(0 0 16px rgba(255, 107, 43, 0.45)); }
-  50%       { filter: drop-shadow(0 0 36px rgba(255, 200, 43, 0.75)); }
+  0%, 100% { filter: drop-shadow(0 0 20px rgba(255, 107, 43, 0.5)); }
+  50%       { filter: drop-shadow(0 0 40px rgba(255, 200, 43, 0.8)); }
 }
 
 .hero-bio {
@@ -478,5 +477,216 @@ body {
   .about-columns {
     grid-template-columns: 1fr;
     gap: 2rem;
+  }
+}
+
+/* ============================================
+   SKILLS SECTION
+   ============================================ */
+
+.skills-section {
+  width: 100%;
+  background: rgba(5, 5, 5, 0.65);
+  padding: 8rem 5rem 9rem;
+  position: relative;
+  z-index: 5;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.skills-section::before {
+  content: '';
+  position: absolute;
+  bottom: -5%;
+  right: 5%;
+  width: 50%;
+  height: 50%;
+  background: radial-gradient(ellipse at center, rgba(255, 107, 43, 0.05) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.skills-heading {
+  font-family: var(--font-body);
+  font-size: clamp(1.8rem, 3.5vw, 3.2rem);
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+  margin-bottom: 4rem;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+}
+
+.skills-dot {
+  color: #ff6b2b;
+  font-weight: 700;
+}
+
+/* ── Category group ── */
+.skill-group {
+  margin-bottom: 4rem;
+}
+
+.skill-group-title {
+  font-family: var(--font-body);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #ff9f43;
+  margin-bottom: 1.6rem;
+  padding-left: 0.9rem;
+  border-left: 2px solid #ff6b2b;
+}
+
+/* ── Logo card grid ── */
+.skill-logo-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+  perspective: 1000px;
+}
+
+/* Individual logo card */
+.skill-logo-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  width: 128px;
+  height: 128px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 20px;
+  padding: 1.4rem 1rem 1.1rem;
+  cursor: default;
+  transition:
+    border-color 0.3s ease,
+    background 0.3s ease,
+    box-shadow 0.3s ease;
+  overflow: hidden;
+}
+
+/* Glowing ring that spins on hover */
+.skill-logo-card::before {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  background: conic-gradient(
+    from 0deg,
+    transparent 0%,
+    rgba(255, 107, 43, 0.8) 20%,
+    rgba(255, 211, 42, 0.6) 40%,
+    transparent 60%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 0;
+  animation: ringRotate 2s linear infinite paused;
+}
+
+.skill-logo-card:hover::before {
+  opacity: 1;
+  animation-play-state: running;
+}
+
+/* Inner mask to keep the dark card bg */
+.skill-logo-card::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 19px;
+  background: #0d0d0d;
+  z-index: 1;
+}
+
+@keyframes ringRotate {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.skill-logo-card:hover {
+  border-color: rgba(255, 107, 43, 0.0); /* ring handles border */
+  background: rgba(255, 107, 43, 0.05);
+  box-shadow:
+    0 25px 60px rgba(255, 107, 43, 0.22),
+    0 0  40px rgba(255, 107, 43, 0.1),
+    inset 0 1px 0 rgba(255,255,255,0.07);
+}
+
+/* Logo image container — sits above the ring (z-index: 2) */
+.skill-logo-img-wrap {
+  position: relative;
+  z-index: 2;
+  width: 58px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Soft glow behind logo on hover */
+  filter: drop-shadow(0 0 0px transparent);
+  transition: filter 0.3s ease;
+}
+
+.skill-logo-card:hover .skill-logo-img-wrap {
+  filter: drop-shadow(0 0 14px rgba(255, 160, 60, 0.5));
+}
+
+.skill-logo-img {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  display: block;
+}
+
+/* For dark logos (Next.js, Express, Prisma) on dark background */
+.skill-logo-invert {
+  filter: invert(1) brightness(0.85);
+}
+
+.skill-logo-name {
+  position: relative;
+  z-index: 2;
+  font-family: var(--font-body);
+  font-size: 0.78rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.55);
+  text-align: center;
+  letter-spacing: 0.03em;
+  line-height: 1.2;
+  transition: color 0.25s, transform 0.25s;
+}
+
+.skill-logo-card:hover .skill-logo-name {
+  color: rgba(255, 200, 120, 0.95);
+  transform: translateY(-2px);
+}
+
+/* Responsive */
+@media (max-width: 900px) {
+  .skills-section {
+    padding: 5rem 2rem 6rem;
+  }
+  .skill-logo-card {
+    width: 108px;
+    height: 108px;
+  }
+  .skill-logo-img-wrap {
+    width: 50px;
+    height: 50px;
+  }
+}
+
+@media (max-width: 560px) {
+  .skill-logo-grid {
+    gap: 0.9rem;
+  }
+  .skill-logo-card {
+    width: 88px;
+    height: 88px;
+  }
+  .skill-logo-img-wrap {
+    width: 42px;
+    height: 42px;
   }
 }
