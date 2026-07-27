@@ -1,7 +1,7 @@
-import React, { useRef, useMemo } from 'react'
+import React, { useRef, useMemo, useState } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
-import { motion } from 'motion/react'
+import { motion, AnimatePresence } from 'motion/react'
 import VariableProximity from './VariableProximity'
 import SplitText from './SplitText'
 
@@ -49,8 +49,176 @@ function ParticleField() {
 }
 
 
+// Helper Component to render custom animated website preview graphics
+function ProjectMockupVisual({ type, accent }) {
+  switch (type) {
+    case 'gas-system':
+      return (
+        <div className="mockup-screen gas-mockup">
+          <div className="mockup-header-bar">
+            <span className="live-pill" style={{ borderColor: accent, color: accent }}>● LIVE TRACKING</span>
+            <span className="system-status">QR AUTH : ENABLED</span>
+          </div>
+          <div className="mockup-body">
+            <div className="fuel-chart-area">
+              <div className="fuel-bar-wrap"><div className="fuel-bar bar-1" style={{ background: accent }}></div></div>
+              <div className="fuel-bar-wrap"><div className="fuel-bar bar-2" style={{ background: accent }}></div></div>
+              <div className="fuel-bar-wrap"><div className="fuel-bar bar-3" style={{ background: accent }}></div></div>
+              <div className="fuel-bar-wrap"><div className="fuel-bar bar-4" style={{ background: accent }}></div></div>
+            </div>
+            <div className="mockup-info-box">
+              <div className="mockup-row-title">Driver Quota Verification</div>
+              <div className="mockup-row-sub">QR Scan Successful • Quota Deducted Securely</div>
+            </div>
+          </div>
+        </div>
+      );
+    case 'taxi-ai':
+      return (
+        <div className="mockup-screen taxi-mockup">
+          <div className="mockup-header-bar">
+            <span className="live-pill" style={{ borderColor: accent, color: accent }}>● AI FARE ENGINE</span>
+            <span className="system-status">DIGITAL ID verified</span>
+          </div>
+          <div className="mockup-body">
+            <div className="transit-map-visual">
+              <div className="pulse-circle" style={{ borderColor: accent }}>
+                <div className="inner-dot" style={{ background: accent }}></div>
+              </div>
+              <div className="route-line" style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }}></div>
+            </div>
+            <div className="mockup-info-box">
+              <div className="mockup-row-title">Automated Cashless Transaction</div>
+              <div className="mockup-row-sub">Transit Fare : Complete • Zero Manual Friction</div>
+            </div>
+          </div>
+        </div>
+      );
+    case 'med-college':
+      return (
+        <div className="mockup-screen med-mockup">
+          <div className="mockup-header-bar">
+            <span className="live-pill" style={{ borderColor: accent, color: accent }}>● DEUTSCHE MED PORTAL</span>
+            <span className="system-status">BAHIR DAR, ETHIOPIA</span>
+          </div>
+          <div className="mockup-body">
+            <div className="portal-pipeline">
+              <div className="step-badge active-step" style={{ borderColor: accent, color: '#fff' }}>1. REGISTRATION</div>
+              <div className="step-divider">→</div>
+              <div className="step-badge active-step" style={{ borderColor: accent, color: '#fff' }}>2. DOC VERIFIED</div>
+              <div className="step-divider">→</div>
+              <div className="step-badge" style={{ background: accent, color: '#000', fontWeight: '700' }}>3. ENROLLED</div>
+            </div>
+            <div className="mockup-info-box">
+              <div className="mockup-row-title">Student Management System</div>
+              <div className="mockup-row-sub">Multi-step interactive registration pipelines</div>
+            </div>
+          </div>
+        </div>
+      );
+    default:
+      return (
+        <div className="mockup-screen social-mockup">
+          <div className="mockup-header-bar">
+            <span className="live-pill" style={{ borderColor: accent, color: accent }}>● SOCIAL FEED WIRE</span>
+            <span className="system-status">INSTANT MESSAGING</span>
+          </div>
+          <div className="mockup-body">
+            <div className="chat-preview-cards">
+              <div className="chat-bubble left">🚀 Post created: Real-time update deployed!</div>
+              <div className="chat-bubble right" style={{ background: accent, color: '#fff' }}>Instant message delivered ✨</div>
+            </div>
+            <div className="mockup-info-box">
+              <div className="mockup-row-title">Real-time Reactive Platform</div>
+              <div className="mockup-row-sub">Powered by Laravel Backend &amp; Vue.js UI</div>
+            </div>
+          </div>
+        </div>
+      );
+  }
+}
+
+const FEATURED_PROJECTS = [
+  {
+    id: 0,
+    title: "Nedajie Gas Theft Control System",
+    subtitle: "BDU Best Graduation Project Winner 2026",
+    role: "Full-Stack Fuel Management",
+    description: "Engineered a robust full-stack fuel management system to eliminate theft through real-time fuel distribution tracking. Integrated QR-code scanning to verify driver identity, validate allowances, and securely deduct quotas.",
+    stack: ["Flutter", "Node.js", "MongoDB", "React.js"],
+    link: "https://github.com/surafelbit",
+    accent: "#00ff88",
+    mockupType: "gas-system"
+  },
+  {
+    id: 1,
+    title: "Yegna Taxi — Digital Transit Fare",
+    subtitle: "BDU AI Hackathon Winner",
+    role: "AI & Digital Transit Architecture",
+    description: "Architected a full-stack digital transit system using digital ID to securely verify individuals and make automatic taxi fare transactions, seamlessly replacing the legacy cash-based transportation ecosystem.",
+    stack: ["Flutter", "Node.js", "PostgreSQL", "React.js"],
+    link: "https://github.com/surafelbit",
+    accent: "#00e5ff",
+    mockupType: "taxi-ai"
+  },
+  {
+    id: 2,
+    title: "Deutsche Für Medicin College",
+    subtitle: "Full-Stack Developer • 07/2025 – 01/2026 | Bahir Dar, Ethiopia",
+    role: "Comprehensive Student Management System",
+    description: "Developed a comprehensive student management system from the ground up. Designed an intuitive modern UI, built interactive frontend interfaces, engineered multi-step application registration pipelines, and constructed a robust, scalable backend architecture.",
+    stack: ["React", "Tailwind CSS", "Node.js", "Express.js"],
+    link: "https://github.com/surafelbit",
+    accent: "#ff6b2b",
+    mockupType: "med-college"
+  },
+  {
+    id: 3,
+    title: "Reactive Social Media App",
+    subtitle: "Full-Featured Platform",
+    role: "Full-Stack Web Application",
+    description: "Built a reactive, high-speed social media platform equipped with instant live messaging, seamless post creation tools, and low-latency interactive feed synchronization.",
+    stack: ["Laravel", "Vue.js"],
+    link: "https://github.com/surafelbit",
+    accent: "#d500f9",
+    mockupType: "social-app"
+  }
+];
+
+const ADDITIONAL_PROJECTS = [
+  {
+    title: "Taxi Calling Engine",
+    stack: ["Next.js", "Socket.io", "Tailwind CSS"],
+    desc: "Real-time interactive ride booking system with instant location dispatch."
+  },
+  {
+    title: "Tour Booking System API",
+    stack: ["Node.js", "Express.js", "MongoDB"],
+    desc: "Robust backend API architecture tailored for scalable tour and itinerary management."
+  },
+  {
+    title: "AI Study Companion",
+    stack: ["React", "Node.js", "Express.js", "OpenAI"],
+    desc: "Intelligent note summarization and study enhancement tool using OpenAI integrations."
+  },
+  {
+    title: "Multi-Branch Inventory POS",
+    stack: ["Flutter", "Nest.js", "React"],
+    desc: "Cross-platform real-time retail application for synchronous multi-branch operations."
+  },
+  {
+    title: "Food Delivery & Social Discovery",
+    stack: ["Flutter", "Go"],
+    desc: "High-performance platform combining rapid restaurant ordering with interactive social discovery."
+  }
+];
+
+
 export default function App() {
   const bioContainerRef = useRef(null)
+  const [hoveredProject, setHoveredProject] = useState(null)
+  const [expandedProject, setExpandedProject] = useState(null)
+
   return (
     <div style={{ width: '100vw', minHeight: '100vh', position: 'relative' }}>
 
@@ -367,6 +535,221 @@ export default function App() {
             </div>
           </div>
         ))}
+
+      </section>
+
+      {/* --- PROJECTS SECTION --- */}
+      <section className="projects-section" id="projects">
+        <motion.div
+          className="about-label"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="about-label-line" />
+          Selected Engineering Works
+          <span className="about-label-line" />
+        </motion.div>
+
+        <motion.h2
+          className="projects-heading"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          Featured innovations &amp; award-winning platforms<span className="skills-dot">.</span>
+        </motion.h2>
+
+        {/* Full-Width Interactive Expandable Showcase */}
+        <div className="fullwidth-projects-list">
+          {FEATURED_PROJECTS.map((proj, index) => {
+            const isHovered = hoveredProject === index;
+            const isExpanded = expandedProject === index;
+
+            return (
+              <motion.div
+                key={proj.id}
+                className={`fullwidth-project-card ${(isHovered || isExpanded) ? 'is-active-state' : ''}`}
+                style={{ '--proj-accent': proj.accent }}
+                onMouseEnter={() => setHoveredProject(index)}
+                onMouseLeave={() => setHoveredProject(null)}
+                onClick={() => setExpandedProject(isExpanded ? null : index)}
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.5, delay: index * 0.08 }}
+              >
+                {/* Top Header Bar: Always Visible */}
+                <div className="fw-header-row">
+                  <div className="fw-title-group">
+                    <span className="fw-index" style={{ color: (isHovered || isExpanded) ? proj.accent : 'rgba(255,255,255,0.3)' }}>
+                      0{index + 1}
+                    </span>
+                    <div>
+                      <div className="fw-badge" style={{ borderColor: proj.accent, color: (isHovered || isExpanded) ? proj.accent : 'var(--text-muted)' }}>
+                        ★ {proj.subtitle}
+                      </div>
+                      <h3 className="fw-title" style={{ color: (isHovered || isExpanded) ? proj.accent : '#fff' }}>
+                        {proj.title}
+                      </h3>
+                    </div>
+                  </div>
+
+                  <div className="fw-tech-group">
+                    <div className="fw-stack-pills">
+                      {proj.stack.map(tech => (
+                        <span key={tech} className="fw-pill">{tech}</span>
+                      ))}
+                    </div>
+                    <div className="fw-interaction-cue" style={{ color: isExpanded ? proj.accent : 'rgba(255,255,255,0.45)' }}>
+                      {isExpanded ? '▲ Hide Description' : '▼ Click for Description'}
+                    </div>
+                    <div className="fw-arrow-btn" style={{ background: (isHovered || isExpanded) ? proj.accent : 'rgba(255,255,255,0.06)', color: (isHovered || isExpanded) ? '#000' : '#fff' }}>
+                      {isExpanded ? '✦' : '↗'}
+                    </div>
+                  </div>
+                </div>
+
+                {/* ON HOVER: Super Cool Animated Website Image Visual ONLY (NO DESCRIPTION!) */}
+                <AnimatePresence>
+                  {isHovered && !isExpanded && (
+                    <motion.div
+                      className="fw-website-preview-wrapper"
+                      initial={{ height: 0, opacity: 0, scale: 0.92, rotateX: 14 }}
+                      animate={{ height: "auto", opacity: 1, scale: 1, rotateX: 0, marginTop: 28 }}
+                      exit={{ height: 0, opacity: 0, scale: 0.94, rotateX: -8, marginTop: 0 }}
+                      transition={{ type: "spring", stiffness: 220, damping: 20 }}
+                      style={{ overflow: 'hidden', transformPerspective: 900 }}
+                    >
+                      <div className="fw-browser-container super-cool-hover-box">
+                        <div className="fw-browser-chrome">
+                          <div className="browser-dots">
+                            <span className="dot dot-red" />
+                            <span className="dot dot-yellow" />
+                            <span className="dot dot-green" />
+                          </div>
+                          <div className="browser-url-bar">
+                            <span className="lock-icon">🔒</span> https://{proj.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.app
+                          </div>
+                          <div className="fw-status-chip" style={{ color: proj.accent, borderColor: proj.accent }}>
+                            ● HOVER VISUAL PREVIEW • CLICK FOR FULL DESCRIPTION
+                          </div>
+                        </div>
+
+                        {/* Interactive Website Graphic Mockup ONLY */}
+                        <div className="fw-mockup-viewport">
+                          <ProjectMockupVisual type={proj.mockupType} accent={proj.accent} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+                {/* ON CLICK: Reveal Comprehensive Description, Architecture & Dedicated Launch Button! */}
+                <AnimatePresence>
+                  {isExpanded && (
+                    <motion.div
+                      className="fw-description-drawer"
+                      initial={{ height: 0, opacity: 0, y: -10 }}
+                      animate={{ height: "auto", opacity: 1, y: 0, marginTop: 28 }}
+                      exit={{ height: 0, opacity: 0, y: -10, marginTop: 0 }}
+                      transition={{ duration: 0.38, ease: [0.25, 0.8, 0.25, 1] }}
+                      style={{ overflow: 'hidden' }}
+                    >
+                      <div className="drawer-content-box" style={{ borderLeftColor: proj.accent }}>
+                        <div className="drawer-header-label" style={{ color: proj.accent }}>
+                          📖 Architecture &amp; System Overview
+                        </div>
+                        <p className="fw-description">
+                          {proj.description}
+                        </p>
+
+                        <div className="drawer-actions-row">
+                          <a
+                            href={proj.link}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            onClick={(e) => e.stopPropagation()}
+                            className="drawer-launch-btn"
+                            style={{ background: proj.accent }}
+                          >
+                            <span>Launch Dedicated Website</span>
+                            <span className="launch-icon">↗</span>
+                          </a>
+                          <span className="drawer-close-hint">
+                            (Click card again to fold details)
+                          </span>
+                        </div>
+                      </div>
+
+                      {/* We keep the high-res website visual inside the expanded drawer too for a seamless view */}
+                      <div className="fw-browser-container expanded-browser-view" style={{ marginTop: '2.2rem' }}>
+                        <div className="fw-browser-chrome">
+                          <div className="browser-dots">
+                            <span className="dot dot-red" />
+                            <span className="dot dot-yellow" />
+                            <span className="dot dot-green" />
+                          </div>
+                          <div className="browser-url-bar">
+                            <span className="lock-icon">🔒</span> https://{proj.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.app
+                          </div>
+                          <div className="fw-status-chip" style={{ color: proj.accent, borderColor: proj.accent }}>
+                            ● HOSTED LIVE PLATFORM
+                          </div>
+                        </div>
+                        <div className="fw-mockup-viewport">
+                          <ProjectMockupVisual type={proj.mockupType} accent={proj.accent} />
+                        </div>
+                      </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+              </motion.div>
+            );
+          })}
+        </div>
+
+        {/* Additional Engineering Works Grid */}
+        <div className="additional-projects-section">
+          <motion.h3
+            className="additional-heading"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.4 }}
+            transition={{ duration: 0.5 }}
+          >
+            Additional Engineering Works &amp; Microservices
+          </motion.h3>
+
+          <div className="additional-grid">
+            {ADDITIONAL_PROJECTS.map((ap, idx) => (
+              <motion.div
+                key={ap.title}
+                className="additional-card"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{ duration: 0.45, delay: idx * 0.08 }}
+                whileHover={{ y: -8, scale: 1.03 }}
+              >
+                <div className="additional-header">
+                  <span className="folder-icon">📂</span>
+                  <span className="external-link-icon">↗</span>
+                </div>
+                <h4 className="additional-title">{ap.title}</h4>
+                <p className="additional-desc">{ap.desc}</p>
+                <div className="additional-stack">
+                  {ap.stack.map(st => (
+                    <span key={st} className="additional-tag">{st}</span>
+                  ))}
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
 
       </section>
 
