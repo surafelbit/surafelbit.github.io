@@ -1,6 +1,7 @@
 import React, { useRef, useMemo } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
+import VariableProximity from './VariableProximity'
 
 // 3D Particle Field inspired by image #2 & #3
 function ParticleField() {
@@ -46,6 +47,7 @@ function ParticleField() {
 }
 
 export default function App() {
+  const bioContainerRef = useRef(null)
   return (
     <div style={{ width: '100vw', height: '100vh', position: 'relative' }}>
 
@@ -82,10 +84,21 @@ export default function App() {
             <span className="accent-text">DEVELOPER</span>
           </h1>
 
-          <p className="hero-bio">
-            Passionate about architecting high-performance web systems and seamless mobile applications.
-            Focused on clean backend logic and intuitive visual experiences.
-          </p>
+          <div
+            ref={bioContainerRef}
+            style={{ position: 'relative', maxWidth: '480px' }}
+          >
+            <p className="hero-bio">
+              <VariableProximity
+                label="Passionate about architecting high-performance web systems and seamless mobile applications. Focused on clean backend logic and intuitive visual experiences."
+                fromFontVariationSettings="'wght' 300, 'opsz' 9"
+                toFontVariationSettings="'wght' 800, 'opsz' 40"
+                containerRef={bioContainerRef}
+                radius={120}
+                falloff="linear"
+              />
+            </p>
+          </div>
 
 
 
