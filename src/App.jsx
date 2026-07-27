@@ -49,94 +49,6 @@ function ParticleField() {
 }
 
 
-// Helper Component to render custom animated website preview graphics
-function ProjectMockupVisual({ type, accent }) {
-  switch (type) {
-    case 'gas-system':
-      return (
-        <div className="mockup-screen gas-mockup">
-          <div className="mockup-header-bar">
-            <span className="live-pill" style={{ borderColor: accent, color: accent }}>● LIVE TRACKING</span>
-            <span className="system-status">QR AUTH : ENABLED</span>
-          </div>
-          <div className="mockup-body">
-            <div className="fuel-chart-area">
-              <div className="fuel-bar-wrap"><div className="fuel-bar bar-1" style={{ background: accent }}></div></div>
-              <div className="fuel-bar-wrap"><div className="fuel-bar bar-2" style={{ background: accent }}></div></div>
-              <div className="fuel-bar-wrap"><div className="fuel-bar bar-3" style={{ background: accent }}></div></div>
-              <div className="fuel-bar-wrap"><div className="fuel-bar bar-4" style={{ background: accent }}></div></div>
-            </div>
-            <div className="mockup-info-box">
-              <div className="mockup-row-title">Driver Quota Verification</div>
-              <div className="mockup-row-sub">QR Scan Successful • Quota Deducted Securely</div>
-            </div>
-          </div>
-        </div>
-      );
-    case 'taxi-ai':
-      return (
-        <div className="mockup-screen taxi-mockup">
-          <div className="mockup-header-bar">
-            <span className="live-pill" style={{ borderColor: accent, color: accent }}>● AI FARE ENGINE</span>
-            <span className="system-status">DIGITAL ID verified</span>
-          </div>
-          <div className="mockup-body">
-            <div className="transit-map-visual">
-              <div className="pulse-circle" style={{ borderColor: accent }}>
-                <div className="inner-dot" style={{ background: accent }}></div>
-              </div>
-              <div className="route-line" style={{ background: `linear-gradient(90deg, ${accent}, transparent)` }}></div>
-            </div>
-            <div className="mockup-info-box">
-              <div className="mockup-row-title">Automated Cashless Transaction</div>
-              <div className="mockup-row-sub">Transit Fare : Complete • Zero Manual Friction</div>
-            </div>
-          </div>
-        </div>
-      );
-    case 'med-college':
-      return (
-        <div className="mockup-screen med-mockup">
-          <div className="mockup-header-bar">
-            <span className="live-pill" style={{ borderColor: accent, color: accent }}>● DEUTSCHE MED PORTAL</span>
-            <span className="system-status">BAHIR DAR, ETHIOPIA</span>
-          </div>
-          <div className="mockup-body">
-            <div className="portal-pipeline">
-              <div className="step-badge active-step" style={{ borderColor: accent, color: '#fff' }}>1. REGISTRATION</div>
-              <div className="step-divider">→</div>
-              <div className="step-badge active-step" style={{ borderColor: accent, color: '#fff' }}>2. DOC VERIFIED</div>
-              <div className="step-divider">→</div>
-              <div className="step-badge" style={{ background: accent, color: '#000', fontWeight: '700' }}>3. ENROLLED</div>
-            </div>
-            <div className="mockup-info-box">
-              <div className="mockup-row-title">Student Management System</div>
-              <div className="mockup-row-sub">Multi-step interactive registration pipelines</div>
-            </div>
-          </div>
-        </div>
-      );
-    default:
-      return (
-        <div className="mockup-screen social-mockup">
-          <div className="mockup-header-bar">
-            <span className="live-pill" style={{ borderColor: accent, color: accent }}>● SOCIAL FEED WIRE</span>
-            <span className="system-status">INSTANT MESSAGING</span>
-          </div>
-          <div className="mockup-body">
-            <div className="chat-preview-cards">
-              <div className="chat-bubble left">🚀 Post created: Real-time update deployed!</div>
-              <div className="chat-bubble right" style={{ background: accent, color: '#fff' }}>Instant message delivered ✨</div>
-            </div>
-            <div className="mockup-info-box">
-              <div className="mockup-row-title">Real-time Reactive Platform</div>
-              <div className="mockup-row-sub">Powered by Laravel Backend &amp; Vue.js UI</div>
-            </div>
-          </div>
-        </div>
-      );
-  }
-}
 
 const FEATURED_PROJECTS = [
   {
@@ -148,7 +60,7 @@ const FEATURED_PROJECTS = [
     stack: ["Flutter", "Node.js", "MongoDB", "React.js"],
     link: "https://github.com/surafelbit",
     accent: "#00ff88",
-    mockupType: "gas-system"
+    image: "/Screenshot 2026-07-27 165327.png"
   },
   {
     id: 1,
@@ -159,7 +71,7 @@ const FEATURED_PROJECTS = [
     stack: ["Flutter", "Node.js", "PostgreSQL", "React.js"],
     link: "https://github.com/surafelbit",
     accent: "#00e5ff",
-    mockupType: "taxi-ai"
+    image: "/Screenshot 2026-07-27 165351.png"
   },
   {
     id: 2,
@@ -170,7 +82,7 @@ const FEATURED_PROJECTS = [
     stack: ["React", "Tailwind CSS", "Node.js", "Express.js"],
     link: "https://github.com/surafelbit",
     accent: "#ff6b2b",
-    mockupType: "med-college"
+    image: "/Screenshot 2026-07-27 165517.png"
   },
   {
     id: 3,
@@ -181,7 +93,7 @@ const FEATURED_PROJECTS = [
     stack: ["Laravel", "Vue.js"],
     link: "https://github.com/surafelbit",
     accent: "#d500f9",
-    mockupType: "social-app"
+    image: "/Screenshot 2026-07-27 165327.png"
   }
 ];
 
@@ -217,7 +129,7 @@ const ADDITIONAL_PROJECTS = [
 export default function App() {
   const bioContainerRef = useRef(null)
   const [hoveredProject, setHoveredProject] = useState(null)
-  const [expandedProject, setExpandedProject] = useState(null)
+  const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
 
   return (
     <div style={{ width: '100vw', minHeight: '100vh', position: 'relative' }}>
@@ -538,7 +450,7 @@ export default function App() {
 
       </section>
 
-      {/* --- PROJECTS SECTION --- */}
+      {/* --- PROJECTS SECTION — Full-Width List + Hover Popup --- */}
       <section className="projects-section" id="projects">
         <motion.div
           className="about-label"
@@ -562,154 +474,86 @@ export default function App() {
           Featured innovations &amp; award-winning platforms<span className="skills-dot">.</span>
         </motion.h2>
 
-        {/* Full-Width Interactive Expandable Showcase */}
-        <div className="fullwidth-projects-list">
+        {/* ── Full-Width Project List ── */}
+        <div
+          className="proj-fullwidth-list"
+          onMouseMove={(e) => setMousePos({ x: e.clientX, y: e.clientY })}
+        >
           {FEATURED_PROJECTS.map((proj, index) => {
             const isHovered = hoveredProject === index;
-            const isExpanded = expandedProject === index;
-
             return (
               <motion.div
                 key={proj.id}
-                className={`fullwidth-project-card ${(isHovered || isExpanded) ? 'is-active-state' : ''}`}
+                className={`proj-row ${isHovered ? 'is-active' : ''}`}
                 style={{ '--proj-accent': proj.accent }}
                 onMouseEnter={() => setHoveredProject(index)}
                 onMouseLeave={() => setHoveredProject(null)}
-                onClick={() => setExpandedProject(isExpanded ? null : index)}
-                initial={{ opacity: 0, y: 40 }}
+                initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.5, delay: index * 0.08 }}
+                transition={{ duration: 0.5, delay: index * 0.07 }}
               >
-                {/* Top Header Bar: Always Visible */}
-                <div className="fw-header-row">
-                  <div className="fw-title-group">
-                    <span className="fw-index" style={{ color: (isHovered || isExpanded) ? proj.accent : 'rgba(255,255,255,0.3)' }}>
-                      0{index + 1}
-                    </span>
-                    <div>
-                      <div className="fw-badge" style={{ borderColor: proj.accent, color: (isHovered || isExpanded) ? proj.accent : 'var(--text-muted)' }}>
-                        ★ {proj.subtitle}
-                      </div>
-                      <h3 className="fw-title" style={{ color: (isHovered || isExpanded) ? proj.accent : '#fff' }}>
-                        {proj.title}
-                      </h3>
-                    </div>
-                  </div>
+                {/* Divider line at top */}
+                <div className="proj-row-divider" />
 
-                  <div className="fw-tech-group">
-                    <div className="fw-stack-pills">
+                <div className="proj-row-inner">
+                  {/* Number */}
+                  <span className="proj-row-number">_{String(index + 1).padStart(2, '0')}.</span>
+
+                  {/* Title + stack */}
+                  <div className="proj-row-content">
+                    <h3 className="proj-row-title">{proj.title}</h3>
+                    <div className="proj-row-stack">
                       {proj.stack.map(tech => (
-                        <span key={tech} className="fw-pill">{tech}</span>
+                        <span key={tech} className="proj-row-tech">{tech}</span>
                       ))}
                     </div>
-                    <div className="fw-interaction-cue" style={{ color: isExpanded ? proj.accent : 'rgba(255,255,255,0.45)' }}>
-                      {isExpanded ? '▲ Hide Description' : '▼ Click for Description'}
-                    </div>
-                    <div className="fw-arrow-btn" style={{ background: (isHovered || isExpanded) ? proj.accent : 'rgba(255,255,255,0.06)', color: (isHovered || isExpanded) ? '#000' : '#fff' }}>
-                      {isExpanded ? '✦' : '↗'}
-                    </div>
                   </div>
+
+                  {/* Play / arrow button */}
+                  <a
+                    href={proj.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="proj-row-play"
+                    onClick={(e) => e.stopPropagation()}
+                    style={{ borderColor: isHovered ? proj.accent : 'rgba(255,255,255,0.15)', color: isHovered ? proj.accent : 'rgba(255,255,255,0.3)' }}
+                  >
+                    ▶
+                  </a>
                 </div>
-
-                {/* ON HOVER: Super Cool Animated Website Image Visual ONLY (NO DESCRIPTION!) */}
-                <AnimatePresence>
-                  {isHovered && !isExpanded && (
-                    <motion.div
-                      className="fw-website-preview-wrapper"
-                      initial={{ height: 0, opacity: 0, scale: 0.92, rotateX: 14 }}
-                      animate={{ height: "auto", opacity: 1, scale: 1, rotateX: 0, marginTop: 28 }}
-                      exit={{ height: 0, opacity: 0, scale: 0.94, rotateX: -8, marginTop: 0 }}
-                      transition={{ type: "spring", stiffness: 220, damping: 20 }}
-                      style={{ overflow: 'hidden', transformPerspective: 900 }}
-                    >
-                      <div className="fw-browser-container super-cool-hover-box">
-                        <div className="fw-browser-chrome">
-                          <div className="browser-dots">
-                            <span className="dot dot-red" />
-                            <span className="dot dot-yellow" />
-                            <span className="dot dot-green" />
-                          </div>
-                          <div className="browser-url-bar">
-                            <span className="lock-icon">🔒</span> https://{proj.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.app
-                          </div>
-                          <div className="fw-status-chip" style={{ color: proj.accent, borderColor: proj.accent }}>
-                            ● HOVER VISUAL PREVIEW • CLICK FOR FULL DESCRIPTION
-                          </div>
-                        </div>
-
-                        {/* Interactive Website Graphic Mockup ONLY */}
-                        <div className="fw-mockup-viewport">
-                          <ProjectMockupVisual type={proj.mockupType} accent={proj.accent} />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
-                {/* ON CLICK: Reveal Comprehensive Description, Architecture & Dedicated Launch Button! */}
-                <AnimatePresence>
-                  {isExpanded && (
-                    <motion.div
-                      className="fw-description-drawer"
-                      initial={{ height: 0, opacity: 0, y: -10 }}
-                      animate={{ height: "auto", opacity: 1, y: 0, marginTop: 28 }}
-                      exit={{ height: 0, opacity: 0, y: -10, marginTop: 0 }}
-                      transition={{ duration: 0.38, ease: [0.25, 0.8, 0.25, 1] }}
-                      style={{ overflow: 'hidden' }}
-                    >
-                      <div className="drawer-content-box" style={{ borderLeftColor: proj.accent }}>
-                        <div className="drawer-header-label" style={{ color: proj.accent }}>
-                          📖 Architecture &amp; System Overview
-                        </div>
-                        <p className="fw-description">
-                          {proj.description}
-                        </p>
-
-                        <div className="drawer-actions-row">
-                          <a
-                            href={proj.link}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            onClick={(e) => e.stopPropagation()}
-                            className="drawer-launch-btn"
-                            style={{ background: proj.accent }}
-                          >
-                            <span>Launch Dedicated Website</span>
-                            <span className="launch-icon">↗</span>
-                          </a>
-                          <span className="drawer-close-hint">
-                            (Click card again to fold details)
-                          </span>
-                        </div>
-                      </div>
-
-                      {/* We keep the high-res website visual inside the expanded drawer too for a seamless view */}
-                      <div className="fw-browser-container expanded-browser-view" style={{ marginTop: '2.2rem' }}>
-                        <div className="fw-browser-chrome">
-                          <div className="browser-dots">
-                            <span className="dot dot-red" />
-                            <span className="dot dot-yellow" />
-                            <span className="dot dot-green" />
-                          </div>
-                          <div className="browser-url-bar">
-                            <span className="lock-icon">🔒</span> https://{proj.title.toLowerCase().replace(/[^a-z0-9]/g, '-')}.app
-                          </div>
-                          <div className="fw-status-chip" style={{ color: proj.accent, borderColor: proj.accent }}>
-                            ● HOSTED LIVE PLATFORM
-                          </div>
-                        </div>
-                        <div className="fw-mockup-viewport">
-                          <ProjectMockupVisual type={proj.mockupType} accent={proj.accent} />
-                        </div>
-                      </div>
-                    </motion.div>
-                  )}
-                </AnimatePresence>
-
               </motion.div>
             );
           })}
+          {/* Bottom divider */}
+          <div className="proj-row-divider" />
+
+          {/* ── Floating Hover Popup ── */}
+          <AnimatePresence>
+            {hoveredProject !== null && (
+              <motion.div
+                className="proj-hover-popup"
+                initial={{ opacity: 0, scale: 0.85, y: 20 }}
+                animate={{ opacity: 1, scale: 1, y: 0 }}
+                exit={{ opacity: 0, scale: 0.85, y: 20 }}
+                transition={{ duration: 0.28, ease: [0.25, 0.8, 0.25, 1] }}
+                style={{
+                  left: `${mousePos.x + 20}px`,
+                  top: `${mousePos.y + 20}px`,
+                }}
+              >
+                <div className="proj-popup-panel" style={{ borderColor: `${FEATURED_PROJECTS[hoveredProject].accent}66` }}>
+                  <div className="proj-popup-viewport">
+                    <img 
+                      src={FEATURED_PROJECTS[hoveredProject].image} 
+                      alt={FEATURED_PROJECTS[hoveredProject].title}
+                      className="proj-popup-image"
+                    />
+                  </div>
+                </div>
+              </motion.div>
+            )}
+          </AnimatePresence>
         </div>
 
         {/* Additional Engineering Works Grid */}
