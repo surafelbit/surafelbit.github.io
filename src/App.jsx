@@ -3,6 +3,7 @@ import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
 import { motion } from 'motion/react'
 import VariableProximity from './VariableProximity'
+import SplitText from './SplitText'
 
 // 3D Particle Field inspired by image #2 & #3
 function ParticleField() {
@@ -56,7 +57,7 @@ export default function App() {
       {/* --- 3D CANVAS BACKGROUND --- */}
       <Canvas
         camera={{ position: [0, 0, 5], fov: 60 }}
-        style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0 }}
+        style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 0, pointerEvents: 'none' }}
       >
         <ambientLight intensity={0.5} />
         <ParticleField />
@@ -174,18 +175,23 @@ export default function App() {
           <span className="about-label-line" />
         </motion.div>
 
-        {/* Big statement */}
-        <motion.h2
-          className="about-statement"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.8, delay: 0.1 }}
-        >
-          I'm a <span className="about-accent">Software Engineer</span> &amp;{' '}
-          <span className="about-accent">Full Stack Developer</span> passionate
-          about building products that are as functional as they are intuitive.
-        </motion.h2>
+        {/* Big statement — SplitText word-by-word reveal on scroll */}
+        <div className="about-statement-wrap">
+          <SplitText
+            tag="h2"
+            text="I'm a Software Engineer & Full Stack Developer — passionate about building products that are as functional as they are intuitive."
+            className="about-statement"
+            splitType="words"
+            delay={60}
+            duration={0.75}
+            ease="power3.out"
+            from={{ opacity: 0, y: 30 }}
+            to={{ opacity: 1, y: 0 }}
+            threshold={0.15}
+            rootMargin="-60px"
+            textAlign="left"
+          />
+        </div>
 
         {/* Tags row */}
         <motion.div
@@ -202,37 +208,39 @@ export default function App() {
 
         {/* Two-column detail */}
         <div className="about-columns">
-          <motion.div
-            className="about-col"
-            initial={{ opacity: 0, x: -30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.25 }}
-          >
+          <div className="about-col">
             <h3 className="about-col-title">What I Do</h3>
-            <p className="about-col-text">
-              I work across the full stack — designing backend systems,
-              crafting responsive frontends, and connecting everything in between.
-              My focus is on performance, scalability, and experiences that feel
-              effortless to use.
-            </p>
-          </motion.div>
+            <SplitText
+              text="I work across the full stack — designing backend systems, crafting responsive frontends, and connecting everything in between. My focus is on performance, scalability, and experiences that feel effortless to use."
+              className="about-col-text"
+              splitType="words"
+              delay={25}
+              duration={0.6}
+              ease="power2.out"
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-40px"
+              textAlign="left"
+            />
+          </div>
 
-          <motion.div
-            className="about-col"
-            initial={{ opacity: 0, x: 30 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 0.7, delay: 0.4 }}
-          >
+          <div className="about-col">
             <h3 className="about-col-title">My Edge</h3>
-            <p className="about-col-text">
-              I've shipped award-winning products and competed — and won — at
-              multiple hackathons. I bring both technical depth and product
-              thinking to every project, making sure what ships is solid,
-              maintainable, and genuinely useful.
-            </p>
-          </motion.div>
+            <SplitText
+              text="I've shipped award-winning products and competed — and won — at multiple hackathons. I bring both technical depth and product thinking to every project, making sure what ships is solid, maintainable, and genuinely useful."
+              className="about-col-text"
+              splitType="words"
+              delay={25}
+              duration={0.6}
+              ease="power2.out"
+              from={{ opacity: 0, y: 20 }}
+              to={{ opacity: 1, y: 0 }}
+              threshold={0.1}
+              rootMargin="-40px"
+              textAlign="left"
+            />
+          </div>
         </div>
 
       </section>
