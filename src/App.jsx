@@ -93,7 +93,7 @@ const FEATURED_PROJECTS = [
     stack: ["Laravel", "Vue.js"],
     link: "https://github.com/surafelbit",
     accent: "#d500f9",
-    image: "/Screenshot 2026-07-27 165327.png"
+    image: "/Screenshot 2026-07-27 165351.png"
   }
 ];
 
@@ -354,47 +354,47 @@ export default function App() {
           {
             category: 'Languages',
             skills: [
-              { name: 'Python',     icon: 'python/python-original' },
+              { name: 'Python', icon: 'python/python-original' },
               { name: 'JavaScript', icon: 'javascript/javascript-original' },
               { name: 'TypeScript', icon: 'typescript/typescript-original' },
-              { name: 'PHP',        icon: 'php/php-original' },
-              { name: 'Go',         icon: 'go/go-original-wordmark' },
-              { name: 'Dart',       icon: 'dart/dart-original' },
-              { name: 'HTML5',      icon: 'html5/html5-original' },
-              { name: 'CSS3',       icon: 'css3/css3-original' },
+              { name: 'PHP', icon: 'php/php-original' },
+              { name: 'Go', icon: 'go/go-original-wordmark' },
+              { name: 'Dart', icon: 'dart/dart-original' },
+              { name: 'HTML5', icon: 'html5/html5-original' },
+              { name: 'CSS3', icon: 'css3/css3-original' },
             ],
           },
           {
             category: 'Frontend',
             skills: [
-              { name: 'React.js',     icon: 'react/react-original' },
-              { name: 'Next.js',      icon: 'nextjs/nextjs-original', invert: true },
-              { name: 'Vue.js',       icon: 'vuejs/vuejs-original' },
+              { name: 'React.js', icon: 'react/react-original' },
+              { name: 'Next.js', icon: 'nextjs/nextjs-original', invert: true },
+              { name: 'Vue.js', icon: 'vuejs/vuejs-original' },
               { name: 'Tailwind CSS', icon: 'tailwindcss/tailwindcss-original' },
             ],
           },
           {
             category: 'Backend',
             skills: [
-              { name: 'Node.js',    icon: 'nodejs/nodejs-original' },
+              { name: 'Node.js', icon: 'nodejs/nodejs-original' },
               { name: 'Express.js', icon: 'express/express-original', invert: true },
-              { name: 'Nest.js',    icon: 'nestjs/nestjs-original' },
-              { name: 'Laravel',    icon: 'laravel/laravel-original' },
+              { name: 'Nest.js', icon: 'nestjs/nestjs-original' },
+              { name: 'Laravel', icon: 'laravel/laravel-original' },
             ],
           },
           {
             category: 'Database & ORM',
             skills: [
               { name: 'PostgreSQL', icon: 'postgresql/postgresql-original' },
-              { name: 'MongoDB',    icon: 'mongodb/mongodb-original' },
-              { name: 'Mongoose',   icon: 'mongodb/mongodb-original' },
-              { name: 'Prisma',     icon: 'prisma/prisma-original', invert: true },
+              { name: 'MongoDB', icon: 'mongodb/mongodb-original' },
+              { name: 'Mongoose', icon: 'mongodb/mongodb-original' },
+              { name: 'Prisma', icon: 'prisma/prisma-original', invert: true },
             ],
           },
           {
             category: 'Tools',
             skills: [
-              { name: 'Git',    icon: 'git/git-original' },
+              { name: 'Git', icon: 'git/git-original' },
               { name: 'Docker', icon: 'docker/docker-original' },
               { name: 'GitHub', icon: 'github/github-original', invert: true },
             ],
@@ -544,8 +544,8 @@ export default function App() {
               >
                 <div className="proj-popup-panel" style={{ borderColor: `${FEATURED_PROJECTS[hoveredProject].accent}66` }}>
                   <div className="proj-popup-viewport">
-                    <img 
-                      src={FEATURED_PROJECTS[hoveredProject].image} 
+                    <img
+                      src={FEATURED_PROJECTS[hoveredProject].image}
                       alt={FEATURED_PROJECTS[hoveredProject].title}
                       className="proj-popup-image"
                     />
