@@ -6,9 +6,259 @@
   <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Surafel Muhabaw | Portfolio</title>
+  <style>
+    /* Immediate Zero-Latency Preloader Styling (Black & Orange Theme) */
+    #app-preloader {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, rgba(255, 102, 0, 0.18) 0%, #050505 75%), #050505;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      z-index: 999999;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif;
+      transition: opacity 0.8s cubic-bezier(0.65, 0, 0.35, 1), transform 0.8s cubic-bezier(0.65, 0, 0.35, 1);
+      overflow: hidden;
+      color: #ffffff;
+      user-select: none;
+    }
+    #app-preloader.loaded {
+      opacity: 0;
+      transform: scale(1.04);
+      pointer-events: none;
+    }
+    /* Ambient Glow Background Orb */
+    .preloader-glow {
+      position: absolute;
+      width: 450px;
+      height: 450px;
+      background: radial-gradient(circle, rgba(255, 107, 0, 0.25) 0%, rgba(255, 107, 0, 0) 70%);
+      border-radius: 50%;
+      pointer-events: none;
+      animation: pulseGlow 3s infinite ease-in-out;
+    }
+    @keyframes pulseGlow {
+      0%, 100% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.15); opacity: 1; }
+    }
+    /* Rotating Ring Animation */
+    .preloader-spinner {
+      position: relative;
+      width: 110px;
+      height: 110px;
+      margin-bottom: 35px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .spinner-ring-1 {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      border: 3px solid transparent;
+      border-top-color: #ff6a00;
+      border-bottom-color: #ff8c00;
+      border-radius: 50%;
+      box-shadow: 0 0 20px rgba(255, 106, 0, 0.6), inset 0 0 15px rgba(255, 106, 0, 0.4);
+      animation: spinRing1 1.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) infinite;
+    }
+    .spinner-ring-2 {
+      position: absolute;
+      width: 76px;
+      height: 76px;
+      border: 3px solid transparent;
+      border-left-color: #ff4500;
+      border-right-color: #ffaa00;
+      border-radius: 50%;
+      box-shadow: 0 0 15px rgba(255, 69, 0, 0.5);
+      animation: spinRing2 0.9s linear infinite reverse;
+    }
+    .spinner-core {
+      width: 24px;
+      height: 24px;
+      background: #ff6a00;
+      border-radius: 50%;
+      box-shadow: 0 0 20px #ff6a00, 0 0 40px #ff6a00;
+      animation: corePulse 1s ease-in-out infinite alternate;
+    }
+    @keyframes spinRing1 {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes spinRing2 {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    @keyframes corePulse {
+      0% { transform: scale(0.85); box-shadow: 0 0 15px #ff6a00; }
+      100% { transform: scale(1.15); box-shadow: 0 0 35px #ff8c00, 0 0 60px #ff4500; }
+    }
+    /* Typography & Progress Counter */
+    .preloader-content {
+      position: relative;
+      z-index: 2;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      width: 280px;
+    }
+    .preloader-title {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.35em;
+      color: #ff8c00;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      text-shadow: 0 0 12px rgba(255, 140, 0, 0.5);
+    }
+    #preloader-percent {
+      font-size: 3.8rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      line-height: 1;
+      margin-bottom: 22px;
+      background: linear-gradient(135deg, #ffffff 30%, #ff8c00 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-shadow: 0 5px 25px rgba(255, 140, 0, 0.25);
+    }
+    /* Sleek Progress Bar */
+    .progress-bar-container {
+      width: 100%;
+      height: 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 999px;
+      overflow: hidden;
+      padding: 1px;
+      box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.6);
+      position: relative;
+    }
+    #progress-bar-fill {
+      height: 100%;
+      width: 0%;
+      background: linear-gradient(90deg, #ff3b00 0%, #ff8c00 70%, #ffbe00 100%);
+      border-radius: 999px;
+      box-shadow: 0 0 15px rgba(255, 140, 0, 0.8);
+      transition: width 0.15s ease-out;
+      position: relative;
+    }
+    /* Shimmer effect on bar */
+    #progress-bar-fill::after {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(90deg, rgba(255,255,255,0) 0%, rgba(255,255,255,0.4) 50%, rgba(255,255,255,0) 100%);
+      animation: shimmer 1.5s infinite;
+    }
+    @keyframes shimmer {
+      0% { transform: translateX(-100%); }
+      100% { transform: translateX(100%); }
+    }
+    #preloader-status {
+      margin-top: 14px;
+      font-size: 0.72rem;
+      font-weight: 500;
+      letter-spacing: 0.18em;
+      color: rgba(255, 255, 255, 0.55);
+      text-transform: uppercase;
+      transition: opacity 0.3s ease;
+    }
+  </style>
 </head>
 
 <body>
+  <!-- Ultra-Responsive Black & Orange Loading Overlay -->
+  <div id="app-preloader">
+    <div class="preloader-glow"></div>
+    <div class="preloader-spinner">
+      <div class="spinner-ring-1"></div>
+      <div class="spinner-ring-2"></div>
+      <div class="spinner-core"></div>
+    </div>
+    <div class="preloader-content">
+      <div class="preloader-title">Surafel Muhabaw</div>
+      <div id="preloader-percent">0%</div>
+      <div class="progress-bar-container">
+        <div id="progress-bar-fill"></div>
+      </div>
+      <div id="preloader-status">INITIALIZING SYSTEMS...</div>
+    </div>
+  </div>
+  <script>
+    (function () {
+      let currentProgress = 0;
+      let targetProgress = 20;
+      let isLoaded = false;
+      const percentEl = document.getElementById('preloader-percent');
+      const barEl = document.getElementById('progress-bar-fill');
+      const statusEl = document.getElementById('preloader-status');
+      const preloaderEl = document.getElementById('app-preloader');
+
+      const updateProgress = () => {
+        if (currentProgress < targetProgress) {
+          // Smooth asymptotic stepping towards target
+          const diff = targetProgress - currentProgress;
+          const step = Math.max(1, Math.ceil(diff * 0.12));
+          currentProgress += step;
+          if (currentProgress > 100) currentProgress = 100;
+
+          if (percentEl) percentEl.innerText = currentProgress + '%';
+          if (barEl) barEl.style.width = currentProgress + '%';
+
+          if (currentProgress >= 35 && currentProgress < 75 && statusEl) {
+            statusEl.innerText = "LOADING 3D ENGINE & ASSETS...";
+          } else if (currentProgress >= 75 && currentProgress < 98 && statusEl) {
+            statusEl.innerText = "PREPARING INTERFACE...";
+          } else if (currentProgress >= 98 && statusEl) {
+            statusEl.innerText = "WELCOME TO MY PORTFOLIO";
+          }
+        }
+
+        if (currentProgress < 100 || !isLoaded) {
+          requestAnimationFrame(updateProgress);
+        } else if (currentProgress >= 100 && isLoaded) {
+          setTimeout(() => {
+            if (preloaderEl) {
+              preloaderEl.classList.add('loaded');
+              setTimeout(() => preloaderEl.remove(), 850);
+            }
+          }, 350);
+        }
+      };
+
+      requestAnimationFrame(updateProgress);
+
+      // Advance progress as browser load stages occur
+      document.addEventListener('DOMContentLoaded', () => {
+        if (!isLoaded) targetProgress = 65;
+      });
+
+      window.addEventListener('load', () => {
+        if (!isLoaded) targetProgress = 88;
+      });
+
+      // Public API for React app to complete the loader once components finish mounting
+      window.completeAppLoading = function () {
+        isLoaded = true;
+        targetProgress = 100;
+      };
+
+      // Fallback safety timeout so user never gets stuck if network packets drop
+      setTimeout(() => {
+        if (!isLoaded) {
+          isLoaded = true;
+          targetProgress = 100;
+        }
+      }, 5000);
+    })();
+  </script>
   <div id="root"></div>
   <script type="module" src="/src/main.jsx"></script>
 </body>
