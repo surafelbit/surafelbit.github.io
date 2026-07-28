@@ -1,4 +1,4 @@
-import React, { useRef, useMemo, useState } from 'react'
+import React, { useRef, useMemo, useState, useEffect } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
 import { motion, AnimatePresence } from 'motion/react'
@@ -130,6 +130,16 @@ export default function App() {
   const bioContainerRef = useRef(null)
   const [hoveredProject, setHoveredProject] = useState(null)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+
+  useEffect(() => {
+    // Notify the Black & Orange HTML preloader that React bundle & 3D elements are initialized
+    const timer = setTimeout(() => {
+      if (typeof window !== 'undefined' && window.completeAppLoading) {
+        window.completeAppLoading()
+      }
+    }, 450) // Short buffer for canvas 3D and fonts to render smoothly
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <div style={{ width: '100vw', minHeight: '100vh', position: 'relative' }}>
