@@ -1,9 +1,11 @@
-import React, { useRef, useMemo, useState, useEffect } from 'react'
+import React, { useRef, useMemo, useState, useEffect, useCallback } from 'react'
 import { Canvas, useFrame } from '@react-three/fiber'
 import { Points, PointMaterial } from '@react-three/drei'
 import { motion, AnimatePresence } from 'motion/react'
 import VariableProximity from './VariableProximity'
 import SplitText from './SplitText'
+import PageTurnTransition from './PageTurnTransition'
+import ProjectDetailPage from './ProjectDetailPage'
 
 // 3D Particle Field inspired by image #2 & #3
 function ParticleField() {
@@ -130,6 +132,28 @@ export default function App() {
   const bioContainerRef = useRef(null)
   const [hoveredProject, setHoveredProject] = useState(null)
   const [mousePos, setMousePos] = useState({ x: 0, y: 0 })
+  const [selectedProject, setSelectedProject] = useState(null)
+  const [isFlipping, setIsFlipping] = useState(false)
+  const [pendingProject, setPendingProject] = useState(null)
+  const [showDetail, setShowDetail] = useState(false)
+
+  const handleProjectClick = useCallback((proj) => {
+    if (isFlipping) return
+    setPendingProject(proj)
+    setIsFlipping(true)
+    setShowDetail(false)
+  }, [isFlipping])
+
+  const handleFlipComplete = useCallback(() => {
+    setSelectedProject(pendingProject)
+    setShowDetail(true)
+    setIsFlipping(false)
+  }, [pendingProject])
+
+  const handleClose = useCallback(() => {
+    setShowDetail(false)
+    setTimeout(() => setSelectedProject(null), 400)
+  }, [])
 
   useEffect(() => {
     // Notify the Black & Orange HTML preloader that React bundle & 3D elements are initialized
@@ -498,6 +522,7 @@ export default function App() {
                 style={{ '--proj-accent': proj.accent }}
                 onMouseEnter={() => setHoveredProject(index)}
                 onMouseLeave={() => setHoveredProject(null)}
+                onClick={() => handleProjectClick(proj)}
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.2 }}
@@ -520,17 +545,13 @@ export default function App() {
                     </div>
                   </div>
 
-                  {/* Play / arrow button */}
-                  <a
-                    href={proj.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
+                  {/* Click hint arrow */}
+                  <div
                     className="proj-row-play"
-                    onClick={(e) => e.stopPropagation()}
-                    style={{ borderColor: isHovered ? proj.accent : 'rgba(255,255,255,0.15)', color: isHovered ? proj.accent : 'rgba(255,255,255,0.3)' }}
+                    style={{ borderColor: isHovered ? proj.accent : 'rgba(255,255,255,0.15)', color: isHovered ? proj.accent : 'rgba(255,255,255,0.3)', cursor: 'pointer' }}
                   >
                     ▶
-                  </a>
+                  </div>
                 </div>
               </motion.div>
             );
@@ -606,6 +627,23 @@ export default function App() {
         </div>
 
       </section>
+
+      {/* ── Page Turn Transition overlay ── */}
+      <PageTurnTransition
+        isAnimating={isFlipping}
+        onComplete={handleFlipComplete}
+        accentColor={pendingProject?.accent || '#00ff88'}
+      />
+
+      {/* ── Project Detail Page ── */}
+      <AnimatePresence>
+        {showDetail && selectedProject && (
+          <ProjectDetailPage
+            project={selectedProject}
+            onClose={handleClose}
+          />
+        )}
+      </AnimatePresence>
 
     </div>
   )
