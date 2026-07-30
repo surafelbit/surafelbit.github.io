@@ -22,7 +22,6 @@ const SplitText = ({
   onLetterAnimationComplete
 }) => {
   const ref = useRef(null);
-  const animationCompletedRef = useRef(false);
   const onCompleteRef = useRef(onLetterAnimationComplete);
   const [fontsLoaded, setFontsLoaded] = useState(false);
 
@@ -43,7 +42,6 @@ const SplitText = ({
   useGSAP(
     () => {
       if (!ref.current || !text || !fontsLoaded) return;
-      if (animationCompletedRef.current) return;
       const el = ref.current;
 
       if (el._rbsplitInstance) {
@@ -89,12 +87,11 @@ const SplitText = ({
             scrollTrigger: {
               trigger: el,
               start,
-              once: true,
+              once: false,
               fastScrollEnd: true,
               anticipatePin: 0.4,
             },
             onComplete: () => {
-              animationCompletedRef.current = true;
               onCompleteRef.current?.();
             },
             willChange: 'transform, opacity',

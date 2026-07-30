@@ -286,7 +286,7 @@ export default function App() {
           className="about-label"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: false, amount: 0.4 }}
           transition={{ duration: 0.6 }}
         >
           <span className="about-label-line" />
@@ -317,7 +317,7 @@ export default function App() {
           className="about-tags"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
+          viewport={{ once: false, amount: 0.4 }}
           transition={{ duration: 0.6, delay: 0.2 }}
         >
           {['2× Hackathon Winner', 'Award-Winning Projects', 'Full Stack', 'Mobile Dev', 'Clean Code'].map(tag => (
