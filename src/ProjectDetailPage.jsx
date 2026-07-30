@@ -7,10 +7,10 @@ export default function ProjectDetailPage({ project, onClose }) {
   return (
     <motion.div
       className="detail-page"
-      initial={{ opacity: 0 }}
+      initial={{ opacity: 1 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
-      transition={{ duration: 0.15, delay: 0.55 }}
+      transition={{ duration: 0.35 }}
     >
       {/* Noise texture overlay */}
       <div className="detail-noise" />

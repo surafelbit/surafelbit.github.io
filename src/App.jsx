@@ -73,7 +73,7 @@ const FEATURED_PROJECTS = [
     stack: ["Flutter", "Node.js", "PostgreSQL", "React.js"],
     link: "https://github.com/surafelbit",
     accent: "#00e5ff",
-    image: "/Screenshot 2026-07-27 165351.png"
+    image: "/Screenshot 2026-07-27 165517.png"
   },
   {
     id: 2,
@@ -84,7 +84,7 @@ const FEATURED_PROJECTS = [
     stack: ["React", "Tailwind CSS", "Node.js", "Express.js"],
     link: "https://github.com/surafelbit",
     accent: "#ff6b2b",
-    image: "/Screenshot 2026-07-27 165517.png"
+    image: "/Screenshot 2026-07-27 165327.png"
   },
   {
     id: 3,
