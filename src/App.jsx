@@ -96,34 +96,39 @@ const FEATURED_PROJECTS = [
     link: "https://github.com/surafelbit",
     accent: "#00e5ff",
     image: "/Screenshot 2026-07-27 165351.png"
-  }
-];
-
-const ADDITIONAL_PROJECTS = [
+  },
   {
+    id: 4,
     title: "Taxi Calling Engine",
+    subtitle: "Real-Time Ride Booking",
+    role: "Full-Stack Web Application",
+    description: "Real-time interactive ride booking system with instant location dispatch, live driver tracking, and seamless fare calculation powered by Socket.io.",
     stack: ["Next.js", "Socket.io", "Tailwind CSS"],
-    desc: "Real-time interactive ride booking system with instant location dispatch."
+    link: "https://github.com/surafelbit",
+    accent: "#00e5ff",
+    image: null
   },
   {
-    title: "Tour Booking System API",
-    stack: ["Node.js", "Express.js", "MongoDB"],
-    desc: "Robust backend API architecture tailored for scalable tour and itinerary management."
-  },
-  {
+    id: 5,
     title: "AI Study Companion",
+    subtitle: "OpenAI-Powered Learning Tool",
+    role: "Full-Stack Web Application",
+    description: "Intelligent note summarization and study enhancement tool using OpenAI integrations for smart flashcard generation, topic breakdowns, and personalized revision schedules.",
     stack: ["React", "Node.js", "Express.js", "OpenAI"],
-    desc: "Intelligent note summarization and study enhancement tool using OpenAI integrations."
+    link: "https://github.com/surafelbit",
+    accent: "#00e5ff",
+    image: null
   },
   {
-    title: "Multi-Branch Inventory POS",
-    stack: ["Flutter", "Nest.js", "React"],
-    desc: "Cross-platform real-time retail application for synchronous multi-branch operations."
-  },
-  {
+    id: 6,
     title: "Food Delivery & Social Discovery",
+    subtitle: "High-Performance Mobile Platform",
+    role: "Mobile Application",
+    description: "High-performance platform combining rapid restaurant ordering with interactive social discovery, enabling users to explore trending venues and share food experiences in real time.",
     stack: ["Flutter", "Go"],
-    desc: "High-performance platform combining rapid restaurant ordering with interactive social discovery."
+    link: "https://github.com/surafelbit",
+    accent: "#00e5ff",
+    image: null
   }
 ];
 
@@ -561,7 +566,7 @@ export default function App() {
 
           {/* ── Floating Hover Popup ── */}
           <AnimatePresence>
-            {hoveredProject !== null && (
+            {hoveredProject !== null && FEATURED_PROJECTS[hoveredProject].image && (
               <motion.div
                 className="proj-hover-popup"
                 initial={{ opacity: 0, scale: 0.85, y: 20 }}
@@ -585,45 +590,6 @@ export default function App() {
               </motion.div>
             )}
           </AnimatePresence>
-        </div>
-
-        {/* Additional Engineering Works Grid */}
-        <div className="additional-projects-section">
-          <motion.h3
-            className="additional-heading"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.4 }}
-            transition={{ duration: 0.5 }}
-          >
-            Additional Engineering Works &amp; Microservices
-          </motion.h3>
-
-          <div className="additional-grid">
-            {ADDITIONAL_PROJECTS.map((ap, idx) => (
-              <motion.div
-                key={ap.title}
-                className="additional-card"
-                initial={{ opacity: 0, y: 30 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.45, delay: idx * 0.08 }}
-                whileHover={{ y: -8, scale: 1.03 }}
-              >
-                <div className="additional-header">
-                  <span className="folder-icon">📂</span>
-                  <span className="external-link-icon">↗</span>
-                </div>
-                <h4 className="additional-title">{ap.title}</h4>
-                <p className="additional-desc">{ap.desc}</p>
-                <div className="additional-stack">
-                  {ap.stack.map(st => (
-                    <span key={st} className="additional-tag">{st}</span>
-                  ))}
-                </div>
-              </motion.div>
-            ))}
-          </div>
         </div>
 
       </section>
