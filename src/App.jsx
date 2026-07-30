@@ -61,7 +61,7 @@ const FEATURED_PROJECTS = [
     description: "Engineered a robust full-stack fuel management system to eliminate theft through real-time fuel distribution tracking. Integrated QR-code scanning to verify driver identity, validate allowances, and securely deduct quotas.",
     stack: ["Flutter", "Node.js", "MongoDB", "React.js"],
     link: "https://github.com/surafelbit",
-    accent: "#00e5ff",
+    accent: "#ff6b2b",
     image: "/Screenshot 2026-07-27 165327.png"
   },
   {
@@ -72,7 +72,7 @@ const FEATURED_PROJECTS = [
     description: "Architected a full-stack digital transit system using digital ID to securely verify individuals and make automatic taxi fare transactions, seamlessly replacing the legacy cash-based transportation ecosystem.",
     stack: ["Flutter", "Node.js", "PostgreSQL", "React.js"],
     link: "https://github.com/surafelbit",
-    accent: "#00e5ff",
+    accent: "#ff6b2b",
     image: "/Screenshot 2026-07-27 165517.png"
   },
   {
@@ -83,7 +83,7 @@ const FEATURED_PROJECTS = [
     description: "Developed a comprehensive student management system from the ground up. Designed an intuitive modern UI, built interactive frontend interfaces, engineered multi-step application registration pipelines, and constructed a robust, scalable backend architecture.",
     stack: ["React", "Tailwind CSS", "Node.js", "Express.js"],
     link: "https://github.com/surafelbit",
-    accent: "#00e5ff",
+    accent: "#ff6b2b",
     image: "/Screenshot 2026-07-27 165327.png"
   },
   {
@@ -94,7 +94,7 @@ const FEATURED_PROJECTS = [
     description: "Built a reactive, high-speed social media platform equipped with instant live messaging, seamless post creation tools, and low-latency interactive feed synchronization.",
     stack: ["Laravel", "Vue.js"],
     link: "https://github.com/surafelbit",
-    accent: "#00e5ff",
+    accent: "#ff6b2b",
     image: "/Screenshot 2026-07-27 165351.png"
   },
   {
@@ -105,7 +105,7 @@ const FEATURED_PROJECTS = [
     description: "Real-time interactive ride booking system with instant location dispatch, live driver tracking, and seamless fare calculation powered by Socket.io.",
     stack: ["Next.js", "Socket.io", "Tailwind CSS"],
     link: "https://github.com/surafelbit",
-    accent: "#00e5ff",
+    accent: "#ff6b2b",
     image: null
   },
   {
@@ -116,7 +116,7 @@ const FEATURED_PROJECTS = [
     description: "Intelligent note summarization and study enhancement tool using OpenAI integrations for smart flashcard generation, topic breakdowns, and personalized revision schedules.",
     stack: ["React", "Node.js", "Express.js", "OpenAI"],
     link: "https://github.com/surafelbit",
-    accent: "#00e5ff",
+    accent: "#ff6b2b",
     image: null
   },
   {
@@ -127,7 +127,7 @@ const FEATURED_PROJECTS = [
     description: "High-performance platform combining rapid restaurant ordering with interactive social discovery, enabling users to explore trending venues and share food experiences in real time.",
     stack: ["Flutter", "Go"],
     link: "https://github.com/surafelbit",
-    accent: "#00e5ff",
+    accent: "#ff6b2b",
     image: null
   }
 ];
@@ -189,7 +189,7 @@ export default function App() {
           <div className="brand-role">Full Stack & Mobile Developer</div>
         </div>
         <div className="nav-actions">
-          <a href="#resume" className="btn btn-outline" style={{ padding: '0.6rem 1.4rem' }}>Resume</a>
+          <a href="/Surafel Muhabaw CV.pdf" download className="btn btn-outline" style={{ padding: '0.6rem 1.4rem' }}>Resume</a>
           <a href="#contact" className="btn btn-primary" style={{ padding: '0.6rem 1.4rem' }}>Let's Talk</a>
         </div>
       </nav>
