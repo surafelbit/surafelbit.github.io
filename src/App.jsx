@@ -61,7 +61,7 @@ const FEATURED_PROJECTS = [
     description: "Engineered a robust full-stack fuel management system to eliminate theft through real-time fuel distribution tracking. Integrated QR-code scanning to verify driver identity, validate allowances, and securely deduct quotas.",
     stack: ["Flutter", "Node.js", "MongoDB", "React.js"],
     link: "https://github.com/surafelbit",
-    accent: "#00ff88",
+    accent: "#00e5ff",
     image: "/Screenshot 2026-07-27 165327.png"
   },
   {
@@ -83,7 +83,7 @@ const FEATURED_PROJECTS = [
     description: "Developed a comprehensive student management system from the ground up. Designed an intuitive modern UI, built interactive frontend interfaces, engineered multi-step application registration pipelines, and constructed a robust, scalable backend architecture.",
     stack: ["React", "Tailwind CSS", "Node.js", "Express.js"],
     link: "https://github.com/surafelbit",
-    accent: "#ff6b2b",
+    accent: "#00e5ff",
     image: "/Screenshot 2026-07-27 165327.png"
   },
   {
@@ -94,7 +94,7 @@ const FEATURED_PROJECTS = [
     description: "Built a reactive, high-speed social media platform equipped with instant live messaging, seamless post creation tools, and low-latency interactive feed synchronization.",
     stack: ["Laravel", "Vue.js"],
     link: "https://github.com/surafelbit",
-    accent: "#d500f9",
+    accent: "#00e5ff",
     image: "/Screenshot 2026-07-27 165351.png"
   }
 ];
