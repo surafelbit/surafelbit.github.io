@@ -1,7 +1,7 @@
 import React from 'react'
 import { motion } from 'motion/react'
 
-export default function ProjectDetailPage({ project, onClose }) {
+export default function ProjectDetailPage({ project, onClose, visible = true }) {
   if (!project) return null
 
   return (
@@ -11,6 +11,13 @@ export default function ProjectDetailPage({ project, onClose }) {
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
       transition={{ duration: 0.35 }}
+      style={{
+        // While mounted behind the canvas (visible=false): painted but invisible.
+        // Two rAFs after mount the canvas fades → visible flips to true → no flash.
+        opacity: visible ? 1 : 0,
+        pointerEvents: visible ? 'auto' : 'none',
+        transition: visible ? 'opacity 0.18s ease-in' : 'none',
+      }}
     >
       {/* Noise texture overlay */}
       <div className="detail-noise" />

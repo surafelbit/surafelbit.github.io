@@ -140,23 +140,34 @@ export default function App() {
   const [selectedProject, setSelectedProject] = useState(null)
   const [isFlipping, setIsFlipping] = useState(false)
   const [pendingProject, setPendingProject] = useState(null)
+  // detailReady: detail page is mounted (possibly hidden behind canvas)
+  // showDetail:  detail page is the top-most visible layer
+  const [detailReady, setDetailReady] = useState(false)
   const [showDetail, setShowDetail] = useState(false)
 
   const handleProjectClick = useCallback((proj) => {
     if (isFlipping) return
     setPendingProject(proj)
-    setIsFlipping(true)
+    setDetailReady(false)
     setShowDetail(false)
+    setIsFlipping(true)
   }, [isFlipping])
 
-  const handleFlipComplete = useCallback(() => {
+  // Phase 1 — canvas curl finishes: mount the detail page BEHIND the canvas
+  const handleFlipMounted = useCallback(() => {
     setSelectedProject(pendingProject)
+    setDetailReady(true)   // detail mounts, still hidden under canvas
+  }, [pendingProject])
+
+  // Phase 2 — canvas has faded: reveal the detail page and remove canvas
+  const handleFlipComplete = useCallback(() => {
     setShowDetail(true)
     setIsFlipping(false)
-  }, [pendingProject])
+  }, [])
 
   const handleClose = useCallback(() => {
     setShowDetail(false)
+    setDetailReady(false)
     setTimeout(() => setSelectedProject(null), 400)
   }, [])
 
@@ -171,7 +182,7 @@ export default function App() {
   }, [])
 
   return (
-    <div style={{ width: '100vw', minHeight: '100vh', position: 'relative' }}>
+    <div style={{ width: '100%', minHeight: '100vh', position: 'relative' }}>
 
       {/* --- 3D CANVAS BACKGROUND --- */}
       <Canvas
@@ -597,16 +608,20 @@ export default function App() {
       {/* ── Page Turn Transition overlay ── */}
       <PageTurnTransition
         isAnimating={isFlipping}
+        onMounted={handleFlipMounted}
         onComplete={handleFlipComplete}
         accentColor={pendingProject?.accent || '#00ff88'}
       />
 
-      {/* ── Project Detail Page ── */}
+      {/* ── Project Detail Page ──
+           Rendered as soon as detailReady is true (behind the canvas),
+           but only becomes the active top layer once showDetail is true.  */}
       <AnimatePresence>
-        {showDetail && selectedProject && (
+        {detailReady && selectedProject && (
           <ProjectDetailPage
             project={selectedProject}
             onClose={handleClose}
+            visible={showDetail}
           />
         )}
       </AnimatePresence>
