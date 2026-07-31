@@ -193,70 +193,101 @@
   </div>
   <script>
     (function () {
-      let currentProgress = 0;
-      let targetProgress = 20;
-      let isLoaded = false;
-      const percentEl = document.getElementById('preloader-percent');
-      const barEl = document.getElementById('progress-bar-fill');
-      const statusEl = document.getElementById('preloader-status');
-      const preloaderEl = document.getElementById('app-preloader');
+      var currentProgress = 0;
+      var targetProgress  = 0;
+      var isReactReady    = false;
+      var rafId           = null;
 
-      const updateProgress = () => {
+      var percentEl   = document.getElementById('preloader-percent');
+      var barEl       = document.getElementById('progress-bar-fill');
+      var statusEl    = document.getElementById('preloader-status');
+      var preloaderEl = document.getElementById('app-preloader');
+
+      // Push the bar only forward, never back
+      function setTarget(pct) {
+        if (pct > targetProgress) {
+          targetProgress = Math.min(100, pct);
+          if (!rafId) rafId = requestAnimationFrame(tick);
+        }
+      }
+
+      function updateStatus(pct) {
+        if (!statusEl) return;
+        if (pct < 40)      statusEl.innerText = 'INITIALIZING SYSTEMS...';
+        else if (pct < 70) statusEl.innerText = 'LOADING 3D ENGINE & ASSETS...';
+        else if (pct < 95) statusEl.innerText = 'PREPARING INTERFACE...';
+        else               statusEl.innerText = 'WELCOME TO MY PORTFOLIO';
+      }
+
+      function tick() {
+        rafId = null;
         if (currentProgress < targetProgress) {
-          // Smooth asymptotic stepping towards target
-          const diff = targetProgress - currentProgress;
-          const step = Math.max(1, Math.ceil(diff * 0.12));
-          currentProgress += step;
-          if (currentProgress > 100) currentProgress = 100;
-
-          if (percentEl) percentEl.innerText = currentProgress + '%';
-          if (barEl) barEl.style.width = currentProgress + '%';
-
-          if (currentProgress >= 35 && currentProgress < 75 && statusEl) {
-            statusEl.innerText = "LOADING 3D ENGINE & ASSETS...";
-          } else if (currentProgress >= 75 && currentProgress < 98 && statusEl) {
-            statusEl.innerText = "PREPARING INTERFACE...";
-          } else if (currentProgress >= 98 && statusEl) {
-            statusEl.innerText = "WELCOME TO MY PORTFOLIO";
-          }
+          var diff = targetProgress - currentProgress;
+          // Smooth ease — faster when gap is big, slows near target
+          currentProgress = Math.min(targetProgress, currentProgress + Math.max(0.4, diff * 0.09));
+          if (percentEl) percentEl.innerText = Math.floor(currentProgress) + '%';
+          if (barEl)     barEl.style.width   = currentProgress + '%';
+          updateStatus(currentProgress);
         }
 
-        if (currentProgress < 100 || !isLoaded) {
-          requestAnimationFrame(updateProgress);
-        } else if (currentProgress >= 100 && isLoaded) {
-          setTimeout(() => {
+        if (currentProgress < targetProgress) {
+          rafId = requestAnimationFrame(tick);
+        } else if (isReactReady && currentProgress >= 100) {
+          // Genuinely finished — fade out
+          setTimeout(function () {
             if (preloaderEl) {
               preloaderEl.classList.add('loaded');
-              setTimeout(() => preloaderEl.remove(), 850);
+              setTimeout(function () { preloaderEl.remove(); }, 850);
             }
-          }, 350);
+          }, 300);
         }
-      };
+      }
 
-      requestAnimationFrame(updateProgress);
+      // ── Signal 1: watch real network requests finish ──────────────────
+      // PerformanceObserver fires for every JS chunk, CSS file, font, and
+      // image that actually completes downloading. The bar moves in step
+      // with real network activity, capped at 55% so the remaining 45%
+      // is reserved for the three real milestones below.
+      var resourcesLoaded    = 0;
+      var ESTIMATED_RESOURCES = 28; // typical chunk + font count for this build
+      var RESOURCE_CAP        = 55;
 
-      // Advance progress as browser load stages occur
-      document.addEventListener('DOMContentLoaded', () => {
-        if (!isLoaded) targetProgress = 65;
+      try {
+        var observer = new PerformanceObserver(function (list) {
+          resourcesLoaded += list.getEntries().length;
+          var pct = Math.min(RESOURCE_CAP, (resourcesLoaded / ESTIMATED_RESOURCES) * RESOURCE_CAP);
+          setTarget(pct);
+        });
+        observer.observe({ type: 'resource', buffered: true });
+      } catch (e) {
+        // Browser doesn't support PerformanceObserver — milestones below still work
+      }
+
+      // ── Signal 2: HTML document fully parsed ─────────────────────────
+      document.addEventListener('DOMContentLoaded', function () {
+        setTarget(Math.max(targetProgress, 60));
       });
 
-      window.addEventListener('load', () => {
-        if (!isLoaded) targetProgress = 88;
+      // ── Signal 3: every linked resource fetched ───────────────────────
+      window.addEventListener('load', function () {
+        setTarget(Math.max(targetProgress, 85));
       });
 
-      // Public API for React app to complete the loader once components finish mounting
+      // ── Signal 4: React + Three.js 3D canvas fully mounted ───────────
       window.completeAppLoading = function () {
-        isLoaded = true;
-        targetProgress = 100;
+        isReactReady = true;
+        setTarget(100);
+        if (!rafId) rafId = requestAnimationFrame(tick);
       };
 
-      // Fallback safety timeout so user never gets stuck if network packets drop
-      setTimeout(() => {
-        if (!isLoaded) {
-          isLoaded = true;
-          targetProgress = 100;
+      // ── Safety net: never trap the user indefinitely ─────────────────
+      setTimeout(function () {
+        if (!isReactReady) {
+          isReactReady = true;
+          setTarget(100);
+          if (!rafId) rafId = requestAnimationFrame(tick);
         }
-      }, 5000);
+      }, 10000);
     })();
   </script>
   <div id="root"></div>
