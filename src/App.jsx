@@ -72,6 +72,7 @@ const FEATURED_PROJECTS = [
     description: "Architected a full-stack digital transit system using digital ID to securely verify individuals and make automatic taxi fare transactions, seamlessly replacing the legacy cash-based transportation ecosystem.",
     stack: ["Flutter", "Node.js", "PostgreSQL", "React.js"],
     link: "https://github.com/surafelbit",
+    liveUrl: "https://yegnataxi-2.onrender.com",
     accent: "#ff6b2b",
     image: "/Screenshot 2026-07-27 165517.png"
   },
@@ -83,6 +84,7 @@ const FEATURED_PROJECTS = [
     description: "Developed a comprehensive student management system from the ground up. Designed an intuitive modern UI, built interactive frontend interfaces, engineered multi-step application registration pipelines, and constructed a robust, scalable backend architecture.",
     stack: ["React", "Tailwind CSS", "Node.js", "Express.js"],
     link: "https://github.com/surafelbit",
+    liveUrl: "https://xn--deutsche-hochschule-fr-medizin-college-17d.tech/",
     accent: "#ff6b2b",
     image: "/Screenshot 2026-07-27 165327.png"
   },
@@ -94,6 +96,7 @@ const FEATURED_PROJECTS = [
     description: "Built a reactive, high-speed social media platform equipped with instant live messaging, seamless post creation tools, and low-latency interactive feed synchronization.",
     stack: ["Laravel", "Vue.js"],
     link: "https://github.com/surafelbit",
+    liveUrl: "https://social-pulse-vpfe.onrender.com/",
     accent: "#ff6b2b",
     image: "/Screenshot 2026-07-27 165351.png"
   },
@@ -116,6 +119,7 @@ const FEATURED_PROJECTS = [
     description: "Intelligent note summarization and study enhancement tool using OpenAI integrations for smart flashcard generation, topic breakdowns, and personalized revision schedules.",
     stack: ["React", "Node.js", "Express.js", "OpenAI"],
     link: "https://github.com/surafelbit",
+    liveUrl: "https://e-learning-4-f386.onrender.com",
     accent: "#ff6b2b",
     image: null
   },
@@ -611,9 +615,6 @@ export default function App() {
         accentColor={pendingProject?.accent || '#00ff88'}
       />
 
-      {/* ── Project Detail Page ──
-           Rendered as soon as detailReady is true (behind the canvas),
-           but only becomes the active top layer once showDetail is true.  */}
       <AnimatePresence>
         {detailReady && selectedProject && (
           <ProjectDetailPage

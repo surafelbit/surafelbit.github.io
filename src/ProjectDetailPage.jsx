@@ -127,6 +127,21 @@ export default function ProjectDetailPage({ project, onClose, visible = true }) 
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.45, delay: 1.28 }}
           >
+            {project.liveUrl && (
+              <a
+                href={project.liveUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="detail-cta-live"
+                style={{ '--live-accent': project.accent }}
+              >
+                <span className="detail-cta-live-pulse" />
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <circle cx="12" cy="12" r="10" /><polyline points="12 8 16 12 12 16" /><line x1="8" y1="12" x2="16" y2="12" />
+                </svg>
+                Visit Live Site
+              </a>
+            )}
             <a
               href={project.link}
               target="_blank"
