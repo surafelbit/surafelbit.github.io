@@ -119,6 +119,7 @@ const FEATURED_PROJECTS = [
     description: "Intelligent note summarization and study enhancement tool using OpenAI integrations for smart flashcard generation, topic breakdowns, and personalized revision schedules.",
     stack: ["React", "Node.js", "Express.js", "OpenAI"],
     link: "https://github.com/surafelbit",
+    liveUrl: "https://e-learning-frontend-397l.vercel.app/",
     accent: "#ff6b2b",
     image: null
   },
