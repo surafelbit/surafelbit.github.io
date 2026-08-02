@@ -119,7 +119,6 @@ const FEATURED_PROJECTS = [
     description: "Intelligent note summarization and study enhancement tool using OpenAI integrations for smart flashcard generation, topic breakdowns, and personalized revision schedules.",
     stack: ["React", "Node.js", "Express.js", "OpenAI"],
     link: "https://github.com/surafelbit",
-    liveUrl: "https://e-learning-4-f386.onrender.com",
     accent: "#ff6b2b",
     image: null
   },
@@ -174,7 +173,6 @@ export default function App() {
   }, [])
 
   useEffect(() => {
-    // Notify the Black & Orange HTML preloader that React bundle & 3D elements are initialized
     const timer = setTimeout(() => {
       if (typeof window !== 'undefined' && window.completeAppLoading) {
         window.completeAppLoading()
