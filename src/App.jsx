@@ -305,7 +305,7 @@ export default function App() {
           About Me
           <span className="about-label-line" />
         </motion.div>
-
+        {/** */}
         {/* Big statement — SplitText word-by-word reveal on scroll */}
         <div className="about-statement-wrap">
           <SplitText
