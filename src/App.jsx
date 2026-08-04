@@ -55,17 +55,6 @@ function ParticleField() {
 const FEATURED_PROJECTS = [
   {
     id: 0,
-    title: "Nedajie Gas Theft Control System",
-    subtitle: "BDU Best Graduation Project Winner 2026",
-    role: "Full-Stack Fuel Management",
-    description: "Engineered a robust full-stack fuel management system to eliminate theft through real-time fuel distribution tracking. Integrated QR-code scanning to verify driver identity, validate allowances, and securely deduct quotas.",
-    stack: ["Flutter", "Node.js", "MongoDB", "React.js"],
-    link: "https://github.com/surafelbit",
-    accent: "#ff6b2b",
-    image: "/Screenshot 2026-07-27 165327.png"
-  },
-  {
-    id: 1,
     title: "Yegna Taxi — Digital Transit Fare",
     subtitle: "BDU AI Hackathon Winner",
     role: "AI & Digital Transit Architecture",
@@ -77,7 +66,7 @@ const FEATURED_PROJECTS = [
     image: "/Screenshot 2026-07-27 165517.png"
   },
   {
-    id: 2,
+    id: 1,
     title: "Deutsche Für Medicin College",
     subtitle: "Full-Stack Developer • 07/2025 – 01/2026 | Bahir Dar, Ethiopia",
     role: "Comprehensive Student Management System",
@@ -89,7 +78,7 @@ const FEATURED_PROJECTS = [
     image: "/Screenshot 2026-07-27 165327.png"
   },
   {
-    id: 3,
+    id: 2,
     title: "Reactive Social Media App",
     subtitle: "Full-Featured Platform",
     role: "Full-Stack Web Application",
@@ -101,7 +90,7 @@ const FEATURED_PROJECTS = [
     image: "/Screenshot 2026-07-27 165351.png"
   },
   {
-    id: 4,
+    id: 3,
     title: "Taxi Calling Engine",
     subtitle: "Real-Time Ride Booking",
     role: "Full-Stack Web Application",
