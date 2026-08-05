@@ -490,6 +490,132 @@ export default function App() {
 
       </section>
 
+      {/* --- EXPERIENCE & JOURNEY SECTION --- */}
+      <section className="experience-section" id="experience">
+
+        <motion.div
+          className="about-label"
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.6 }}
+        >
+          <span className="about-label-line" />
+          Experience & Journey
+          <span className="about-label-line" />
+        </motion.div>
+
+        <motion.h2
+          className="skills-heading"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 0.7, delay: 0.1 }}
+        >
+          Where I've been<span className="skills-dot">.</span>
+        </motion.h2>
+
+        <div className="timeline-container">
+
+          {/* Timeline line */}
+          <div className="timeline-line" />
+
+          {[
+            {
+              type: 'work',
+              period: '07/2025 – 01/2026',
+              role: 'Full Stack Developer',
+              company: 'Deutsche Für Medicin College',
+              location: 'Bahir Dar, Ethiopia',
+              description: 'Led end-to-end development of a comprehensive student management system. Designed the full UI/UX, built interactive frontend interfaces with React, engineered multi-step registration pipelines, and architected a robust Node.js/Express backend.',
+              tags: ['React', 'Node.js', 'Express.js', 'Tailwind CSS'],
+              highlight: true,
+            },
+            {
+              type: 'award',
+              period: '2025',
+              role: 'Hackathon Winner — 1st Place',
+              company: 'BDU AI Hackathon',
+              location: 'Bahir Dar University, Ethiopia',
+              description: 'Won first place with Yegna Taxi — a full-stack digital transit fare system leveraging digital ID for secure, cashless taxi payments, replacing the legacy cash-based ecosystem.',
+              tags: ['Flutter', 'Node.js', 'PostgreSQL', 'React.js'],
+              highlight: false,
+            },
+            {
+              type: 'work',
+              period: '2024 – Present',
+              role: 'Freelance Full Stack Developer',
+              company: 'Independent',
+              location: 'Remote',
+              description: 'Delivered 10+ production web and mobile applications for clients across diverse industries. Specializing in React, Next.js, and Flutter frontends paired with Node.js and Laravel backends.',
+              tags: ['Next.js', 'Laravel', 'Flutter', 'Go', 'PostgreSQL'],
+              highlight: false,
+            },
+            {
+              type: 'award',
+              period: '2024',
+              role: 'Hackathon Winner — Top Prize',
+              company: 'Regional Tech Hackathon',
+              location: 'Ethiopia',
+              description: 'Secured top honors in a regional hackathon with a high-performance social discovery and food delivery mobile platform built with Flutter and Go.',
+              tags: ['Flutter', 'Go'],
+              highlight: false,
+            },
+            {
+              type: 'education',
+              period: '2021 – Present',
+              role: 'B.Sc. Software Engineering',
+              company: 'Bahir Dar University',
+              location: 'Bahir Dar, Ethiopia',
+              description: 'Studying software engineering with focus areas in distributed systems, algorithms, and modern application architectures. Active in hackathons, open-source, and student tech communities.',
+              tags: ['Algorithms', 'Distributed Systems', 'Software Architecture'],
+              highlight: false,
+            },
+          ].map((item, idx) => (
+            <motion.div
+              key={idx}
+              className={`timeline-item ${idx % 2 === 0 ? 'timeline-left' : 'timeline-right'}`}
+              initial={{ opacity: 0, x: idx % 2 === 0 ? -60 : 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.05 * idx, ease: 'easeOut' }}
+            >
+              {/* Dot on the center line */}
+              <div className={`timeline-dot ${item.type === 'award' ? 'timeline-dot-award' : item.type === 'education' ? 'timeline-dot-edu' : ''}`}>
+                {item.type === 'award' ? '★' : item.type === 'education' ? '🎓' : ''}
+              </div>
+
+              <div className={`timeline-card ${item.highlight ? 'timeline-card-featured' : ''}`}>
+                <div className="timeline-card-top">
+                  <span className="timeline-period">{item.period}</span>
+                  <span className={`timeline-type-badge timeline-type-${item.type}`}>
+                    {item.type === 'work' ? 'Work' : item.type === 'award' ? 'Award' : 'Education'}
+                  </span>
+                </div>
+
+                <h3 className="timeline-role">{item.role}</h3>
+
+                <div className="timeline-company">
+                  <span className="timeline-company-name">{item.company}</span>
+                  <span className="timeline-company-sep">·</span>
+                  <span className="timeline-company-loc">{item.location}</span>
+                </div>
+
+                <p className="timeline-desc">{item.description}</p>
+
+                <div className="timeline-tags">
+                  {item.tags.map(tag => (
+                    <span key={tag} className="timeline-tag">{tag}</span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+
+        </div>
+
+      </section>
+
       {/* --- PROJECTS SECTION — Full-Width List + Hover Popup --- */}
       <section className="projects-section" id="projects">
         <motion.div
