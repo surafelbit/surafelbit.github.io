@@ -1134,6 +1134,353 @@ body {
 }
 
 
+/* ============================================================
+   EXPERIENCE & JOURNEY SECTION
+   ============================================================ */
+
+.experience-section {
+  width: 100%;
+  background: rgba(5, 5, 5, 0.7);
+  padding: 8rem 5rem 9rem;
+  position: relative;
+  z-index: 5;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  overflow: hidden;
+  box-sizing: border-box;
+}
+
+/* Ambient glow blob */
+.experience-section::before {
+  content: '';
+  position: absolute;
+  top: 5%;
+  right: -10%;
+  width: 55%;
+  height: 55%;
+  background: radial-gradient(ellipse at center, rgba(255, 107, 43, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ── Centered vertical spine ── */
+.timeline-container {
+  position: relative;
+  max-width: 1060px;
+  margin: 0 auto;
+  padding: 2rem 0 4rem;
+}
+
+.timeline-line {
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  transform: translateX(-50%);
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(255, 107, 43, 0.35) 8%,
+    rgba(255, 107, 43, 0.35) 92%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+/* ── Each timeline entry ── */
+.timeline-item {
+  position: relative;
+  width: 48%;
+  margin-bottom: 4rem;
+}
+
+.timeline-left {
+  margin-right: auto;
+  padding-right: 3rem;
+}
+
+.timeline-right {
+  margin-left: auto;
+  padding-left: 3rem;
+}
+
+/* ── Center dot ── */
+.timeline-dot {
+  position: absolute;
+  top: 2rem;
+  width: 14px;
+  height: 14px;
+  border-radius: 50%;
+  background: #ff6b2b;
+  border: 3px solid #080808;
+  box-shadow: 0 0 18px rgba(255, 107, 43, 0.7);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0;         /* hide emoji by default — shown only in award/edu */
+  z-index: 2;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+
+/* Left-side items: dot sits on the right edge of the card column */
+.timeline-left .timeline-dot {
+  right: -7px;
+}
+
+/* Right-side items: dot sits on the left edge */
+.timeline-right .timeline-dot {
+  left: -7px;
+}
+
+.timeline-dot-award {
+  background: #ffd32a;
+  box-shadow: 0 0 18px rgba(255, 211, 42, 0.75);
+  width: 28px;
+  height: 28px;
+  font-size: 0.8rem;
+  border-radius: 50%;
+  top: 1.4rem;
+}
+
+.timeline-left .timeline-dot-award {
+  right: -14px;
+}
+
+.timeline-right .timeline-dot-award {
+  left: -14px;
+}
+
+.timeline-dot-edu {
+  background: #b8a9e0;
+  box-shadow: 0 0 18px rgba(184, 169, 224, 0.65);
+  width: 28px;
+  height: 28px;
+  font-size: 0.8rem;
+  border-radius: 50%;
+  top: 1.4rem;
+}
+
+.timeline-left .timeline-dot-edu {
+  right: -14px;
+}
+
+.timeline-right .timeline-dot-edu {
+  left: -14px;
+}
+
+/* Hover: enlarge the dot */
+.timeline-item:hover .timeline-dot {
+  transform: scale(1.4);
+}
+
+/* ── Card ── */
+.timeline-card {
+  background: rgba(255, 255, 255, 0.028);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 18px;
+  padding: 1.8rem 2rem;
+  transition: border-color 0.3s, box-shadow 0.3s, background 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.timeline-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 18px;
+  background: radial-gradient(circle at 70% 20%, rgba(255, 107, 43, 0.06) 0%, transparent 65%);
+  opacity: 0;
+  transition: opacity 0.4s;
+  pointer-events: none;
+}
+
+.timeline-item:hover .timeline-card {
+  border-color: rgba(255, 107, 43, 0.38);
+  box-shadow:
+    0 20px 60px rgba(0, 0, 0, 0.55),
+    0 0 40px rgba(255, 107, 43, 0.1);
+  background: rgba(255, 107, 43, 0.04);
+}
+
+.timeline-item:hover .timeline-card::before {
+  opacity: 1;
+}
+
+/* Featured (first) card gets an extra glow border */
+.timeline-card-featured {
+  border-color: rgba(255, 107, 43, 0.3);
+  background: rgba(255, 107, 43, 0.045);
+  box-shadow: 0 0 40px rgba(255, 107, 43, 0.12), inset 0 1px 0 rgba(255, 255, 255, 0.06);
+}
+
+/* ── Card internals ── */
+.timeline-card-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.85rem;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.timeline-period {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #ff9f43;
+  font-family: var(--font-body);
+}
+
+.timeline-type-badge {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  padding: 0.28rem 0.75rem;
+  border-radius: 999px;
+}
+
+.timeline-type-work {
+  background: rgba(0, 229, 255, 0.1);
+  color: #00e5ff;
+  border: 1px solid rgba(0, 229, 255, 0.25);
+}
+
+.timeline-type-award {
+  background: rgba(255, 211, 42, 0.1);
+  color: #ffd32a;
+  border: 1px solid rgba(255, 211, 42, 0.3);
+}
+
+.timeline-type-education {
+  background: rgba(184, 169, 224, 0.1);
+  color: #b8a9e0;
+  border: 1px solid rgba(184, 169, 224, 0.25);
+}
+
+.timeline-role {
+  font-family: var(--font-display);
+  font-size: clamp(1.05rem, 2vw, 1.4rem);
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  line-height: 1.25;
+}
+
+.timeline-company {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.timeline-company-name {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.timeline-company-sep {
+  color: rgba(255, 255, 255, 0.25);
+}
+
+.timeline-company-loc {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 400;
+}
+
+.timeline-desc {
+  font-size: 0.92rem;
+  font-weight: 300;
+  color: var(--text-muted);
+  line-height: 1.8;
+  margin-bottom: 1.2rem;
+}
+
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45rem;
+}
+
+.timeline-tag {
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.45);
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 0.25rem 0.65rem;
+  border-radius: 5px;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.timeline-item:hover .timeline-tag {
+  color: rgba(255, 159, 67, 0.9);
+  border-color: rgba(255, 107, 43, 0.3);
+}
+
+/* ── Responsive ── */
+@media (max-width: 900px) {
+  .experience-section {
+    padding: 5rem 2rem 6rem;
+  }
+
+  /* Collapse to single column */
+  .timeline-line {
+    left: 20px;
+  }
+
+  .timeline-container {
+    padding-left: 2.5rem;
+  }
+
+  .timeline-item,
+  .timeline-left,
+  .timeline-right {
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 2.5rem;
+    padding-right: 0;
+  }
+
+  .timeline-left .timeline-dot,
+  .timeline-right .timeline-dot {
+    left: -7px;
+    right: auto;
+  }
+
+  .timeline-left .timeline-dot-award,
+  .timeline-right .timeline-dot-award,
+  .timeline-left .timeline-dot-edu,
+  .timeline-right .timeline-dot-edu {
+    left: -14px;
+    right: auto;
+  }
+}
+
+@media (max-width: 480px) {
+  .experience-section {
+    padding: 4rem 1.25rem 5rem;
+  }
+
+  .timeline-container {
+    padding-left: 2rem;
+  }
+
+  .timeline-card {
+    padding: 1.4rem 1.4rem;
+  }
+}
+
+
 /* Page turn transition is rendered on a <canvas> element in PageTurnTransition.jsx — no CSS classes needed */
 
 
