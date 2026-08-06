@@ -365,7 +365,6 @@ export default function App() {
 
       </section>
 
-      {/* --- SKILLS SECTION --- */}
       <section className="skills-section" id="skills">
 
         <motion.div
@@ -517,7 +516,6 @@ export default function App() {
 
         <div className="timeline-container">
 
-          {/* Timeline line */}
           <div className="timeline-line" />
 
           {[
