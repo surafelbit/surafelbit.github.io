@@ -601,10 +601,10 @@ export default function App() {
                   </span>
                 </div>
 
-                <h3 className="timeline-role">{item.role}</h3>
+                <h3 className="timeline-role">{item.company}</h3>
 
                 <div className="timeline-company">
-                  <span className="timeline-company-name">{item.company}</span>
+                  <span className="timeline-company-name">{item.role}</span>
                   <span className="timeline-company-sep">·</span>
                   <span className="timeline-company-loc">{item.location}</span>
                 </div>
