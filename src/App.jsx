@@ -571,7 +571,7 @@ export default function App() {
             },
             {
               type: 'education',
-              period: '2021 – Present',
+              period: '2022 - 2026',
               role: 'B.Sc. Software Engineering',
               company: 'Bahir Dar University',
               location: 'Bahir Dar, Ethiopia',
